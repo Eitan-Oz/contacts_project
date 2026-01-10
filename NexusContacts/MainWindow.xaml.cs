@@ -1,42 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace NexusContacts
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
+        public MessageBoxResult languageResult;
+
         public MainWindow()
         {
+            languageResult = MessageBox.Show("Do you want to stay in English? \n האם תרצה שהתוכנה תשאר באנגלית?",
+                                             "Set Language / הגדרת שפה",
+                                             MessageBoxButton.YesNo,
+                                             MessageBoxImage.Question);
             InitializeComponent();
-            
+            SetChoices();
+
         }
 
+        public void SetChoices()
+        {
+            if (languageResult == MessageBoxResult.Yes) 
+            {
+                string[] choicesL = new string[3] { "Add Contact", "All Contacts", "Favorite Contacts" };
 
-        //public void SetChoices()
-        //{
-        //    string[] choicesL = new string[3] { "Login","settings", "favorite contacts" };
-        //    Button[] btns;
-        //    for (int i=0; i< choicesL.Length; i++)
-        //    {
+                for (int i = 0; i < choicesL.Length; i++)
+                {
+                    Button btn = new Button();
+                    btn.Content = choicesL[i];
+                    btn.Margin = new Thickness(5);
+                    ChoicesGrid.Children.Add(btn);
+                }
+            }
+            else if (languageResult == MessageBoxResult.No) 
+            {
+                Chetext.Text = "ברוכים הבאים לאפליקצית אנשי הקשר";
+                string[] choicesL = new string[3] { "הוספת איש קשר", "רשימת אנשי קשר", "אנשי קשר מועדפים" };
 
-        //    }
-            
-        //}
+                for (int i = 0; i < choicesL.Length; i++)
+                {
+                    Button btn = new Button();
+                    btn.Content = choicesL[i];
+                    btn.Margin = new Thickness(5);
+                    ChoicesGrid.Children.Add(btn);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Something went wrong. I think you closed the window by pressing X.",
+                                "Error",
+                                MessageBoxButton.OK,
+                                MessageBoxImage.Stop);
+                this.Close();
+            }
+        }
+
+        private void ContactsShow(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void AddContact(object sender, RoutedEventArgs e)
+        {
+
+        }
+        private void FavoriteContactsShow(object sender, RoutedEventArgs e)
+        {
+
+        }
 
     }
 }
