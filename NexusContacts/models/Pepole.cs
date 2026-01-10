@@ -1,10 +1,10 @@
-ο»Ώusing System.ComponentModel;
+using System.ComponentModel;
 
 namespace NexusContacts.models
 {
     internal class Pepole: INotifyPropertyChanged
     {
-        // Χ”Χ•Χ΅Χ¤ΧªΧ™ internal set Χ›Χ“Χ™ Χ©ΧªΧ•Χ›Χ ΧΧΧΧ ΧΧª Χ”-ID Χ›Χ©ΧΧªΧ” ΧΧ•Χ©Χ Χ ΧªΧ•Χ Χ™Χ ΧΧ”-SQL
+        // δερτϊι internal set λγι ωϊελμ μξμΰ ΰϊ δ-ID λωΰϊδ ξεωκ πϊεπιν ξδ-SQL
         public int ContID { get; internal set; }
 
         public string FirstName { get; set; }
@@ -12,16 +12,19 @@ namespace NexusContacts.models
         public string PhoneNumber { get; set; }
         public byte? Age { get; set; }
 
-        // Χ›ΧΧ Χ”-internal set ΧΧΧ¤Χ©Χ¨ ΧΧ§Χ•Χ“ Χ”-SQL Χ©ΧΧ ΧΧ”Χ›Χ Χ™Χ΅ ΧΧª Χ”ΧΧ™Χ“ΧΆ
-        public byte[] ImageRaw { get; internal set; }
+        // λΰο δ-internal set ξΰτωψ μχεγ δ-SQL ωμκ μδλπιρ ΰϊ δξιγς
+       // public byte[] ImageRaw { get; internal set; }
         public bool? IsFavorite { get; internal set; }
 
-        public Pepole(int ID, string Fname, string Lname, string phonNum,byte age,bool favo, byte[] getimag)
+        public Pepole(int ID, string Fname, string Lname, string phonNum,byte age,bool favo/*, byte[] getimag*/)
         {
             this.ContID = ID;
             this.FirstName = Fname;
             this.LastName = Lname;
             this.PhoneNumber = phonNum;
+            this.Age = age;
+            this.IsFavorite = favo;
+          //  this.ImageRaw = getimag;
         }
 
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
