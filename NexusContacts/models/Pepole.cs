@@ -20,7 +20,8 @@ namespace NexusContacts.models
         {
             this.ContID = ID;
             this.FirstName = Fname;
-
+            this.LastName = Lname;
+            this.PhoneNumber = phonNum;
         }
 
         event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
