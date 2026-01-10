@@ -6,7 +6,40 @@
         xmlns:local="clr-namespace:NexusContacts"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Text="Hello, just choose what do you want to do" 
+                   FontSize="30" 
+                   HorizontalAlignment="Center" 
+                   Margin="0,20,0,20" 
+                   Grid.Row="0" Grid.ColumnSpan="3"/>
+
+        <Viewbox Grid.Row="1" Grid.ColumnSpan="3" Margin="50">
+            <TextBlock Text="⭐" Opacity="0.2" />
+        </Viewbox>
+
+        <Button x:Name="tLoginBT" Content="login/signin" 
+                Grid.Row="2" Grid.Column="0" 
+                Margin="10" Height="40" Visibility="Visible" />
+
+        <Button x:Name="settingBT" Content="settings" 
+                Grid.Row="2" Grid.Column="1" 
+                Margin="10" Height="40" Visibility="Visible" />
+
+        <Button x:Name="exitBT" Content="exit" 
+                Grid.Row="2" Grid.Column="2" 
+                Margin="10" Height="40" Visibility="Visible" />
     </Grid>
-</Window>
+</Window>   

@@ -23,6 +23,20 @@ namespace NexusContacts
         public MainWindow()
         {
             InitializeComponent();
+            
         }
+
+
+        //public void SetChoices()
+        //{
+        //    string[] choicesL = new string[3] { "Login","settings", "favorite contacts" };
+        //    Button[] btns;
+        //    for (int i=0; i< choicesL.Length; i++)
+        //    {
+
+        //    }
+            
+        //}
+
     }
 }
