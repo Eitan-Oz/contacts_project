@@ -1,4 +1,5 @@
-ο»Ώusing System.Windows;
+using System.Diagnostics;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace NexusContacts
@@ -9,8 +10,8 @@ namespace NexusContacts
 
         public MainWindow()
         {
-            languageResult = MessageBox.Show("Do you want to stay in English? \n Χ”ΧΧ ΧªΧ¨Χ¦Χ” Χ©Χ”ΧªΧ•Χ›Χ Χ” ΧªΧ©ΧΧ¨ Χ‘ΧΧ Χ’ΧΧ™Χª?",
-                                             "Set Language / Χ”Χ’Χ“Χ¨Χª Χ©Χ¤Χ”",
+            languageResult = MessageBox.Show("Do you want to stay in English? \n δΰν ϊψφδ ωδϊελπδ ϊωΰψ αΰπβμιϊ?",
+                                             "Set Language / δβγψϊ ωτδ",
                                              MessageBoxButton.YesNo,
                                              MessageBoxImage.Question);
             InitializeComponent();
@@ -29,13 +30,25 @@ namespace NexusContacts
                     Button btn = new Button();
                     btn.Content = choicesL[i];
                     btn.Margin = new Thickness(5);
+                    switch(i)
+                    {
+                        case 0:
+                            btn.Click += AddContact;
+                            break;
+                        case 1:
+                            btn.Click += ContactsShow;
+                            break;
+                        case 2:
+                            btn.Click += FavoriteContactsShow;
+                            break;
+                    }
                     ChoicesGrid.Children.Add(btn);
                 }
             }
             else if (languageResult == MessageBoxResult.No) 
             {
-                Chetext.Text = "Χ‘Χ¨Χ•Χ›Χ™Χ Χ”Χ‘ΧΧ™Χ ΧΧΧ¤ΧΧ™Χ§Χ¦Χ™Χª ΧΧ Χ©Χ™ Χ”Χ§Χ©Χ¨";
-                string[] choicesL = new string[3] { "Χ”Χ•Χ΅Χ¤Χª ΧΧ™Χ© Χ§Χ©Χ¨", "Χ¨Χ©Χ™ΧΧª ΧΧ Χ©Χ™ Χ§Χ©Χ¨", "ΧΧ Χ©Χ™ Χ§Χ©Χ¨ ΧΧ•ΧΆΧ“Χ¤Χ™Χ" };
+                Chetext.Text = "αψελιν δαΰιν μΰτμιχφιϊ ΰπωι δχωψ";
+                string[] choicesL = new string[3] { "δερτϊ ΰιω χωψ", "ψωιξϊ ΰπωι χωψ", "ΰπωι χωψ ξεςγτιν" };
 
                 for (int i = 0; i < choicesL.Length; i++)
                 {
@@ -55,13 +68,25 @@ namespace NexusContacts
             }
         }
 
+        private void Btn_Click1(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        private void Btn_Click(object sender, RoutedEventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         private void ContactsShow(object sender, RoutedEventArgs e)
         {
 
         }
         private void AddContact(object sender, RoutedEventArgs e)
         {
-
+            AddContact addContactWindow = new AddContact();
+            addContactWindow.ShowDialog();
+            
         }
         private void FavoriteContactsShow(object sender, RoutedEventArgs e)
         {
