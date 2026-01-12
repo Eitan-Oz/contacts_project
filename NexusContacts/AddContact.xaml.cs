@@ -36,10 +36,11 @@ namespace NexusContacts
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
-            // הוספנו N לפני הגרשים של השדות הטקסטואליים
             string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
                          $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue})";
             baseDal.ExecuteInsertQuery(sql);
+            MessageBox.Show("Contact added");
+            this.Close();
         }
     }
 }

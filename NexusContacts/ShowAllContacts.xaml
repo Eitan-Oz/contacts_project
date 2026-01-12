@@ -1,0 +1,47 @@
+﻿<Window x:Class="NexusContacts.ShowAllContacts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NexusContacts"
+        mc:Ignorable="d"
+        Title="ShowAllContacts" Height="450" Width="800">
+    <Grid Margin="10">
+        <DataGrid x:Name="dgContacts" 
+              AutoGenerateColumns="False" 
+              CanUserAddRows="False" 
+              MouseDoubleClick="EditCont"
+              PreviewKeyUp="del_klickUp"
+              HeadersVisibility="Column" 
+              GridLinesVisibility="Horizontal"
+              Background="White"
+              AlternatingRowBackground="#F2F2F2"
+              BorderBrush="LightGray"
+              BorderThickness="1">
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="מזהה" 
+                                Binding="{Binding contID}" 
+                                Width="50" 
+                                IsReadOnly="True"/>
+
+                <DataGridTextColumn Header="שם פרטי" 
+                                Binding="{Binding Fname}" 
+                                Width="*"
+                                IsReadOnly="True"/>
+
+                <DataGridTextColumn Header="שם משפחה" 
+                                Binding="{Binding Lname}" 
+                                Width="*"
+                                IsReadOnly="True"/>
+
+                <DataGridTextColumn Header="מספר טלפון" 
+                                Binding="{Binding PhoneNum}" 
+                                Width="*"
+                                IsReadOnly="True"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
+    

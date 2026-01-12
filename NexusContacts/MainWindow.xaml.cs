@@ -80,10 +80,6 @@ namespace NexusContacts
             }
         }
 
-        private void Btn_Click1(object sender, RoutedEventArgs e)
-        {
-            throw new System.NotImplementedException();
-        }
 
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
@@ -92,7 +88,9 @@ namespace NexusContacts
 
         private void ContactsShow(object sender, RoutedEventArgs e)
         {
-
+            ShowAllContacts showAllContacts = new ShowAllContacts();
+            showAllContacts.Show();
+            this.Close();
         }
         private void AddContact(object sender, RoutedEventArgs e)
         {
