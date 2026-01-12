@@ -55,6 +55,18 @@ namespace NexusContacts
                     Button btn = new Button();
                     btn.Content = choicesL[i];
                     btn.Margin = new Thickness(5);
+                    switch (i)
+                    {
+                        case 0:
+                            btn.Click += AddContact;
+                            break;
+                        case 1:
+                            btn.Click += ContactsShow;
+                            break;
+                        case 2:
+                            btn.Click += FavoriteContactsShow;
+                            break;
+                    }
                     ChoicesGrid.Children.Add(btn);
                 }
             }
