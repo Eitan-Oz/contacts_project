@@ -11,7 +11,6 @@
               AutoGenerateColumns="False" 
               CanUserAddRows="False" 
               MouseDoubleClick="EditCont"
-              PreviewKeyUp="del_klickUp"
               HeadersVisibility="Column" 
               GridLinesVisibility="Horizontal"
               Background="White"

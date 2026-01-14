@@ -32,17 +32,11 @@ namespace NexusContacts
 
         private void EditCont(object sender, MouseButtonEventArgs e)
         {
-            EditContact editContact = new EditContact();
-            editContact.Show();
-            this.Close();
+           
+            
+
+            
         }
 
-        private void del_klickUp(object sender, KeyEventArgs e)
-        {
-            if (dgContacts.SelectedCells != null)
-            {
-                
-            }
-        }
     }
 }

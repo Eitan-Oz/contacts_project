@@ -17,9 +17,10 @@ namespace NexusContacts
     /// <summary>
     /// Interaction logic for EditContact.xaml
     /// </summary>
-    public partial class EditContact : Window
+    public partial class EditContactWin : Window
     {
-        public EditContact()
+
+        public EditContactWin()
         {
             InitializeComponent();
         }
