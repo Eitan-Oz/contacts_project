@@ -4,7 +4,6 @@
     [Lname]       NVARCHAR (50) NULL,
     [PhoneNum]    NVARCHAR (50) NULL,
     [age]         TINYINT           NULL,
-    [image]       IMAGE         NULL,
     [IsFavorite ] BIT           NULL,
     PRIMARY KEY CLUSTERED ([contID] ASC)
 );
