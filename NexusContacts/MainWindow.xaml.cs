@@ -6,14 +6,9 @@ namespace NexusContacts
 {
     public partial class MainWindow : Window
     {
-        public MessageBoxResult languageResult;
 
         public MainWindow()
         {
-            languageResult = MessageBox.Show("Do you want to stay in English? \n האם תרצה שהתוכנה תשאר באנגלית?",
-                                             "Set Language / הגדרת שפה",
-                                             MessageBoxButton.YesNo,
-                                             MessageBoxImage.Question);
             InitializeComponent();
             SetChoices();
 
@@ -21,63 +16,28 @@ namespace NexusContacts
 
         public void SetChoices()
         {
-            if (languageResult == MessageBoxResult.Yes) 
-            {
-                string[] choicesL = new string[3] { "Add Contact", "All Contacts", "Favorite Contacts" };
+            string[] choicesL = new string[3] { "Add Contact", "All Contacts", "Favorite Contacts" };
 
-                for (int i = 0; i < choicesL.Length; i++)
-                {
-                    Button btn = new Button();
-                    btn.Content = choicesL[i];
-                    btn.Margin = new Thickness(5);
-                    switch(i)
-                    {
-                        case 0:
-                            btn.Click += AddContact;
-                            break;
-                        case 1:
-                            btn.Click += ContactsShow;
-                            break;
-                        case 2:
-                            btn.Click += FavoriteContactsShow;
-                            break;
-                    }
-                    ChoicesGrid.Children.Add(btn);
-                }
-            }
-            else if (languageResult == MessageBoxResult.No) 
+            for (int i = 0; i < choicesL.Length; i++)
             {
-                Chetext.Text = "ברוכים הבאים לאפליקצית אנשי הקשר";
-                string[] choicesL = new string[3] { "הוספת איש קשר", "רשימת אנשי קשר", "אנשי קשר מועדפים" };
+                Button btn = new Button();
+                btn.Content = choicesL[i];
+                btn.Margin = new Thickness(5);
+                switch (i)
+                {
+                    case 0:
+                        btn.Click += AddContact;
+                        break;
+                    case 1:
+                        btn.Click += ContactsShow;
+                        break;
+                    case 2:
+                        btn.Click += FavoriteContactsShow;
+                        break;
+                }
+                ChoicesGrid.Children.Add(btn);
+            }
 
-                for (int i = 0; i < choicesL.Length; i++)
-                {
-                    Button btn = new Button();
-                    btn.Content = choicesL[i];
-                    btn.Margin = new Thickness(5);
-                    switch (i)
-                    {
-                        case 0:
-                            btn.Click += AddContact;
-                            break;
-                        case 1:
-                            btn.Click += ContactsShow;
-                            break;
-                        case 2:
-                            btn.Click += FavoriteContactsShow;
-                            break;
-                    }
-                    ChoicesGrid.Children.Add(btn);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Something went wrong. I think you closed the window by pressing X.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Stop);
-                this.Close();
-            }
         }
 
 
@@ -96,11 +56,13 @@ namespace NexusContacts
         {
             AddContact addContactWindow = new AddContact();
             addContactWindow.ShowDialog();
-            
+
         }
         private void FavoriteContactsShow(object sender, RoutedEventArgs e)
         {
-
+            AllFavoriteShow FShow = new AllFavoriteShow();
+            FShow.Show();
+            this.Close();
         }
 
     }
