@@ -32,7 +32,13 @@ namespace NexusContacts
 
         private void EditCont(object sender, MouseButtonEventArgs e)
         {
-           
+            //Console.WriteLine(ID);
+            //int id = int.Parse(ID);
+
+            ID.GetValue();
+
+            MessageBox.Show(ID.GetValue().ToString());
+
             
 
             
