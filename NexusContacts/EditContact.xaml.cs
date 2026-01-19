@@ -20,7 +20,7 @@ namespace NexusContacts
     public partial class EditContactWin : Window
     {
 
-        public EditContactWin()
+        public EditContactWin(int idGet)
         {
             InitializeComponent();
         }
