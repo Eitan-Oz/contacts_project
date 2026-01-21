@@ -44,6 +44,11 @@ namespace NexusContacts.models
             internal set { _isFavorite = value; OnPropertyChanged(); }
         }
 
+        public Pepole()
+        {
+
+        }
+
         public Pepole(int ID, string Fname, string Lname, string phonNum, byte? age, bool? favo/*, byte[] getimag*/)
         {
             this.ContID = ID;

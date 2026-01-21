@@ -50,6 +50,7 @@ namespace NexusContacts
         {
             ShowAllContacts showAllContacts = new ShowAllContacts();
             showAllContacts.Show();
+            
             this.Close();
         }
         private void AddContact(object sender, RoutedEventArgs e)

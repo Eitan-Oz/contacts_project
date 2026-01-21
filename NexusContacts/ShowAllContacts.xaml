@@ -8,7 +8,6 @@
         Title="ShowAllContacts" Height="450" Width="800">
     <Grid Margin="10">
         <DataGrid x:Name="dgContacts" 
-              AutoGenerateColumns="False" 
               CanUserAddRows="False" 
               MouseDoubleClick="EditCont"
               HeadersVisibility="Column" 
@@ -18,29 +17,6 @@
               BorderBrush="LightGray"
               BorderThickness="1">
 
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="מזהה" 
-                                    x:Name="ID"
-                                Binding="{Binding contID}" 
-                                Width="50" 
-                                IsReadOnly="True"/>
-
-                <DataGridTextColumn Header="שם פרטי" 
-                                Binding="{Binding Fname}" 
-                                Width="*"
-                                IsReadOnly="True"/>
-
-                <DataGridTextColumn Header="שם משפחה" 
-                                Binding="{Binding Lname}" 
-                                Width="*"
-                                IsReadOnly="True"/>
-
-                <DataGridTextColumn Header="מספר טלפון" 
-                                Binding="{Binding PhoneNum}" 
-                                Width="*"
-                                IsReadOnly="True"/>
-
-            </DataGrid.Columns>
         </DataGrid>
     </Grid>
 </Window>
