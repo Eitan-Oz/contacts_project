@@ -15,7 +15,7 @@ namespace NexusContacts
     /// </summary>
     public partial class ShowAllContacts : Window
     {
-        private static List<Pepole>  pepoles;
+        public  List<Pepole> pepoles;
         public ShowAllContacts()
         {
             InitializeComponent();
@@ -36,10 +36,14 @@ namespace NexusContacts
 
         private void EditCont(object sender, MouseButtonEventArgs e)
         {
-           int index = dgContacts.SelectedIndex;
-            Pepole save= pepoles[index];
-            EditContactWin co = new EditContactWin(save.ContID);
-
+            if (dgContacts.SelectedIndex >= 0)
+            {
+                int index = dgContacts.SelectedIndex;
+                Pepole save = pepoles[index];
+                EditContactWin co = new EditContactWin(save);
+                co.Show();
+                this.Close();
+            }
         }
 
 

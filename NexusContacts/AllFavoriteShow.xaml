@@ -7,6 +7,15 @@
         mc:Ignorable="d"
         Title="AllFavoriteShow" Height="450" Width="800">
     <Grid>
-        
+        <DataGrid x:Name="dgContacts" 
+          CanUserAddRows="False" 
+          HeadersVisibility="Column" 
+          IsReadOnly="True"
+          GridLinesVisibility="Horizontal"
+          Background="White"
+          AlternatingRowBackground="#F2F2F2"
+          BorderBrush="LightGray"
+          BorderThickness="1">
+        </DataGrid>
     </Grid>
 </Window>

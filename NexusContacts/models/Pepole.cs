@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace NexusContacts.models
 {
-    internal class Pepole : INotifyPropertyChanged
+    public class Pepole : INotifyPropertyChanged
     {
         private string _firstName;
         private string _lastName;

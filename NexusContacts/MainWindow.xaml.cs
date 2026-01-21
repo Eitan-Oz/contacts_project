@@ -1,3 +1,5 @@
+using NexusContacts.models;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -61,8 +63,11 @@ namespace NexusContacts
         }
         private void FavoriteContactsShow(object sender, RoutedEventArgs e)
         {
-            AllFavoriteShow FShow = new AllFavoriteShow();
-            FShow.Show();
+            ShowAllContacts take = new ShowAllContacts();
+            take.Activate();
+            List<Pepole> getP = take.pepoles;
+            take.Close();
+            AllFavoriteShow favoriteShow = new AllFavoriteShow(getP);
             this.Close();
         }
 

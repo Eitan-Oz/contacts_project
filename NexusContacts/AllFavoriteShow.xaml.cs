@@ -1,5 +1,7 @@
-﻿using System;
+﻿using NexusContacts.models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,11 @@ namespace NexusContacts
     /// </summary>
     public partial class AllFavoriteShow : Window
     {
-        public AllFavoriteShow()
+        public AllFavoriteShow(List<Pepole> pepole)
         {
             InitializeComponent();
+            // Set the ItemsSource to the list of favorite people
+            dgContacts.ItemsSource = pepole.Where(p => p.IsFavorite == true).ToList();
         }
     }
 }
