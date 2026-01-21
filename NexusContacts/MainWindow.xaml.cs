@@ -68,6 +68,7 @@ namespace NexusContacts
             List<Pepole> getP = take.pepoles;
             take.Close();
             AllFavoriteShow favoriteShow = new AllFavoriteShow(getP);
+            favoriteShow.Show();
             this.Close();
         }
 
