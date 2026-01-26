@@ -30,6 +30,7 @@ namespace NexusContacts
             txtAge.Text = p.Age.ToString();
             txtLastName.Text = p.LastName;
             txtPhone.Text = p.PhoneNumber;
+            chkIsFavorite.IsChecked = p.IsFavorite;
 
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -42,10 +43,12 @@ namespace NexusContacts
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
             string sql = $"UPDATE [Peoples]\n" +
-                $"SET Fname = '{Fname}', Lname = '{Lname}', PhoneNum = '{phoneNum}', age = {age}, IsFavorite = {favSqlValue}\n" +
+                $"SET Fname = N'{Fname}', Lname = N'{Lname}', PhoneNum = '{phoneNum}', age = {age}, IsFavorite = {favSqlValue}\n" +
                 $"WHERE  contID ={tContactID}";
             baseDal.ExecuteUpdateQuery(sql);
             MessageBox.Show("Contact edited");
+            MainWindow window = new MainWindow();
+            window.Show();
             this.Close();
         }
 

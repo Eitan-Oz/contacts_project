@@ -65,7 +65,7 @@ namespace NexusContacts
         {
             ShowAllContacts take = new ShowAllContacts();
             take.Activate();
-            List<Pepole> getP = take.pepoles;
+            List<Pepole> getP = take.people;
             take.Close();
             AllFavoriteShow favoriteShow = new AllFavoriteShow(getP);
             favoriteShow.Show();

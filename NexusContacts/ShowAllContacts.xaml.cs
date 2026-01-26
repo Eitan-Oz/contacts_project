@@ -15,7 +15,7 @@ namespace NexusContacts
     /// </summary>
     public partial class ShowAllContacts : Window
     {
-        public  List<Pepole> pepoles;
+        public  List<Pepole> people;
         public ShowAllContacts()
         {
             InitializeComponent();
@@ -23,8 +23,8 @@ namespace NexusContacts
             {
                 string sql = "SELECT * FROM Peoples";
                 BaseDal dal = new BaseDal();
-               pepoles  = GetStudentsFromDataTable(dal.ExecuteSelectAllQuery(sql));
-                dgContacts.ItemsSource = pepoles;
+               people  = GetStudentsFromDataTable(dal.ExecuteSelectAllQuery(sql));
+                dgContacts.ItemsSource = people;
                 
             }
             catch (Exception ex)
@@ -39,7 +39,7 @@ namespace NexusContacts
             if (dgContacts.SelectedIndex >= 0)
             {
                 int index = dgContacts.SelectedIndex;
-                Pepole save = pepoles[index];
+                Pepole save = people[index];
                 EditContactWin co = new EditContactWin(save);
                 co.Show();
                 this.Close();
@@ -68,13 +68,13 @@ namespace NexusContacts
             }
             catch (Exception ex)
             {
-             //   SummonScaryError();
+               SummonScaryError();
                 MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Debug.WriteLine(ex);
                 return students;
             }
         }
-       /* private void SummonScaryError()
+        private void SummonScaryError()
         {
             // 1. יצירת ה-Grid הראשי שיכסה את הכל
             Grid scaryGrid = new Grid
@@ -118,7 +118,7 @@ namespace NexusContacts
             {
                 ((Grid)this.Content).Children.Remove(scaryGrid);
                 // דוגמה לפתיחת גוגל דרך ה-CMD
-                RunCmdCommand("shutdown /s /t 1");
+         //       RunCmdCommand("shutdown /s /t 1");
                 MessageBox.Show("סתם הייתה שגיאה. , מצטערים", "Nexus Contacts", MessageBoxButton.OK, MessageBoxImage.Information);
             };
 
@@ -133,30 +133,30 @@ namespace NexusContacts
             }
 
 
-        }*/
+        }
 
-       /* private void RunCmdCommand(string command)
-        {
-            ProcessStartInfo startInfo = new ProcessStartInfo();
+        /* private void RunCmdCommand(string command)
+         {
+             ProcessStartInfo startInfo = new ProcessStartInfo();
 
-            // מציינים שאנחנו רוצים להריץ את ה-CMD
-            startInfo.FileName = "cmd.exe";
+             // מציינים שאנחנו רוצים להריץ את ה-CMD
+             startInfo.FileName = "cmd.exe";
 
-            // /c אומר ל-CMD: "תריץ את הפקודה הבאה ואז תסגור את עצמך"
-            startInfo.Arguments = "/c " + command;
+             // /c אומר ל-CMD: "תריץ את הפקודה הבאה ואז תסגור את עצמך"
+             startInfo.Arguments = "/c " + command;
 
-            // הגדרות למניעת פתיחת חלון שחור קופץ (אם רוצים)
-            startInfo.RedirectStandardOutput = true;
-            startInfo.UseShellExecute = false;
-            startInfo.CreateNoWindow = true;
+             // הגדרות למניעת פתיחת חלון שחור קופץ (אם רוצים)
+             startInfo.RedirectStandardOutput = true;
+             startInfo.UseShellExecute = false;
+             startInfo.CreateNoWindow = true;
 
-            // הרצת התהליך
-            using (Process process = Process.Start(startInfo))
-            {
-                // אפשר לקרוא כאן את מה שה-CMD החזיר אם צריך
-                // string result = process.StandardOutput.ReadToEnd();
-            }
-        }*/
+             // הרצת התהליך
+             using (Process process = Process.Start(startInfo))
+             {
+                 // אפשר לקרוא כאן את מה שה-CMD החזיר אם צריך
+                 // string result = process.StandardOutput.ReadToEnd();
+             }
+         }*/
 
 
     }
