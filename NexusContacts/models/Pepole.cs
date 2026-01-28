@@ -59,6 +59,8 @@ namespace NexusContacts.models
             this.IsFavorite = favo;
         }
 
+       
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged([CallerMemberName] string name = null)

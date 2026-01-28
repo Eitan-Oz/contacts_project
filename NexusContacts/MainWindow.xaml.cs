@@ -1,6 +1,6 @@
-using NexusContacts.models;
+﻿using NexusContacts.models;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Text.Json;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
@@ -89,27 +89,52 @@ namespace NexusContacts
                 return null;
             }
         }
-        private async void  SetCity_Click(object sender, RoutedEventArgs e)
+        private async void SetCity_Click(object sender, RoutedEventArgs e)
         {
+            BaseDal dal = new BaseDal();
+            if (!dal.ExecuteSelectBoolQuery("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Cities'"))
+            {
+                string sqlsand = "CREATE TABLE [Cities] (\n" +
+                "Id INT IDENTITY(1,1) PRIMARY KEY,\n" +
+                "GovId INT, \n" +
+                "city_code INT,\n" +
+                "city_name_he NVARCHAR(100),\n" +
+                "city_name_en NVARCHAR(100)\n" +
+                ");";
+
+                  dal.ExecuteUpdateQuery(sqlsand);
+            }
+
+
             string url = "https://data.gov.il/api/3/action/datastore_search?resource_id=8f714b6f-c35c-4b40-a0e7-547b675eee0e";
             string jsonResult = await GetGovDataAsync(url);
             if (jsonResult != null)
             {
+                // 1. המרה: הופכים את הטקסט לאובייקטים
+                var data = JsonSerializer.Deserialize<GovApiResponse>(jsonResult);
 
-              //  BaseDal dal = new BaseDal();
-              //  string sqlsand = "CREATE TABLE [Cities] (\n" +
-              //      "Id INT PRIMARY KEY,\n" +
-              //      "city_code INT,\n" +
-              //      "city_name_he NVARCHAR(100),\n" +
-              //      "city_name_en NVARCHAR(100)\n" +
-              //      ");";
-                   
-              //int esolt=  dal.ExecuteSelectIntQuery(sqlsand);
-                MessageBox.Show("I got the data"+jsonResult);
-            }
-            else
-            {
-                MessageBox.Show("We got aproblam to get the data");
+                if (data != null && data.Result != null)
+                {
+                    // 2. לולאה ושמירה למסד הנתונים
+                    foreach (var city in data.Result.Records)
+                    {
+                        // המרת סמל היישוב למספר
+                        int codeVal = 0;
+                        int.TryParse(city.CityCode, out codeVal);
+
+                        // ניקוי גרשיים כדי לא לשבור את ה-SQL
+                        string safeHebrew = city.NameHebrew != null ? city.NameHebrew.Replace("'", "''") : "";
+                        string safeEnglish = city.NameEnglish != null ? city.NameEnglish.Replace("'", "''") : "";
+
+                        // יצירת השאילתה
+                        string insertSql = $"INSERT INTO Cities (city_code, city_name_he, city_name_en) VALUES ({codeVal}, N'{safeHebrew}', N'{safeEnglish}')";
+
+                        // ביצוע השמירה
+                        dal.ExecuteInsertQuery(insertSql);
+                    }
+
+                    MessageBox.Show($"בוצע בהצלחה! {data.Result.Records.Count} ערים נשמרו.");
+                }
             }
         }
     }
