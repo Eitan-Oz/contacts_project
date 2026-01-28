@@ -18,6 +18,7 @@ namespace NexusContacts
     public partial class AddContact : Window
     {
         public int NextContactID { get; set; }
+        public List<CityRecord> cities { get; set; }
         public AddContact()
         {
             InitializeComponent();
@@ -25,6 +26,8 @@ namespace NexusContacts
             this.DataContext = this;
             int count = cont.ExecuteSelectIntQuery("SELECT COUNT(contID) FROM [Peoples]");
             this.NextContactID = count + 1;
+            CityConnectToDBMathods get = new CityConnectToDBMathods();
+            this.cities = get.GetCityFromDataTable(cont.ExecuteSelectAllQuery("SELECT * FROM [Cities]"));
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

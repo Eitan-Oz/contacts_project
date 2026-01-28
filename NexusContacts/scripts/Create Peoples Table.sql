@@ -3,6 +3,7 @@
     [Fname]       NVARCHAR (50) NULL,
     [Lname]       NVARCHAR (50) NULL,
     [PhoneNum]    NVARCHAR (50) NULL,
+    [cityId] INT NULL, 
     [age]         TINYINT           NULL,
     [IsFavorite ] BIT           NULL,
     PRIMARY KEY CLUSTERED ([contID] ASC)

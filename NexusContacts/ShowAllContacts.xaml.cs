@@ -25,7 +25,6 @@ namespace NexusContacts
                 BaseDal dal = new BaseDal();
                people  = GetStudentsFromDataTable(dal.ExecuteSelectAllQuery(sql));
                 dgContacts.ItemsSource = people;
-                
             }
             catch (Exception ex)
             {
@@ -61,7 +60,7 @@ namespace NexusContacts
                     s.LastName = row.Field<string>("LName");
                     s.Age = row.Field<byte>("Age");
                     s.PhoneNumber = row.Field<string>("PhoneNum");
-                    s.IsFavorite = row.Field<bool?>("IsFavorite ") ?? false;
+                    s.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
                     students.Add(s);
                 }
                 return students;

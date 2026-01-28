@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices; 
 
@@ -9,11 +9,16 @@ namespace NexusContacts.models
         private string _firstName;
         private string _lastName;
         private string _phoneNumber;
+        private int _cityId;
         private byte? _age;
         private bool? _isFavorite;
 
         public int ContID { get; internal set; }
-
+        public int CityId
+        {
+            get => _cityId;
+            set { _cityId = value;OnPropertyChanged(); }
+        }
         public string FirstName
         {
             get => _firstName;
@@ -49,17 +54,20 @@ namespace NexusContacts.models
 
         }
 
-        public Pepole(int ID, string Fname, string Lname, string phonNum, byte? age, bool? favo/*, byte[] getimag*/)
+        // הוספתי את cityId לרשימת הפרמטרים
+        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo)
         {
             this.ContID = ID;
             this.FirstName = Fname;
             this.LastName = Lname;
             this.PhoneNumber = phonNum;
+
+            this.CityId = cityId; // הוספתי את השורה הזו
+
             this.Age = age;
             this.IsFavorite = favo;
         }
 
-       
 
         public event PropertyChangedEventHandler PropertyChanged;
 

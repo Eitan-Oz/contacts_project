@@ -13,7 +13,7 @@
               HeadersVisibility="Column" 
               IsReadOnly="True"
               Margin="20"
-                  FontSize="20"
+              FontSize="20"
               GridLinesVisibility="Horizontal"
               Background="White"
               AlternatingRowBackground="#F2F2F2"

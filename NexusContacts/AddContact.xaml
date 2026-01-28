@@ -1,4 +1,4 @@
-<Window x:Class="NexusContacts.AddContact"
+﻿<Window x:Class="NexusContacts.AddContact"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -27,9 +27,9 @@
 
         <Grid Grid.Row="1" Grid.Column="0" Margin="10">
             <TextBox x:Name="txtFirstName" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
-            <TextBlock Text="First Name" FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
+            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
-                    <Style TargetType="TextBlock">
+                    <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=txtFirstName}" Value="">
@@ -37,8 +37,7 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </TextBlock.Style>
-            </TextBlock>
+                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="שם פרטי"/><LineBreak/><Run FlowDirection="RightToLeft" Language="he-il"/></TextBlock>
         </Grid>
 
         <TextBlock x:Name="ContactID" 
@@ -53,9 +52,9 @@
 
         <Grid Grid.Row="2" Grid.Column="0" Margin="10">
             <TextBox x:Name="txtLastName" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
-            <TextBlock Text="Last Name" FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
+            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
-                    <Style TargetType="TextBlock">
+                    <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=txtLastName}" Value="">
@@ -63,15 +62,14 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </TextBlock.Style>
-            </TextBlock>
+                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="שם משפחה"/><LineBreak/><Run FlowDirection="RightToLeft" Language="he-il"/></TextBlock>
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1" Margin="10">
             <TextBox x:Name="txtPhone" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
-            <TextBlock Text="Phone Number" FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
+            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
-                    <Style TargetType="TextBlock">
+                    <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=txtPhone}" Value="">
@@ -79,15 +77,14 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </TextBlock.Style>
-            </TextBlock>
+                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="מספר טלפון"/></TextBlock>
         </Grid>
 
         <Grid Grid.Row="3" Grid.Column="0" Margin="10">
             <TextBox x:Name="txtAge" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
-            <TextBlock Text="Age" FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
+            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
-                    <Style TargetType="TextBlock">
+                    <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Text, ElementName=txtAge}" Value="">
@@ -95,8 +92,7 @@
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>
-                </TextBlock.Style>
-            </TextBlock>
+                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="גיל"/></TextBlock>
         </Grid>
 
         <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0">
@@ -105,11 +101,11 @@
                     <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
                 </CheckBox.RenderTransform>
             </CheckBox>
-            <TextBlock Text="Add to Favorites" FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="DarkSlateBlue"/>
+            <TextBlock FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="DarkSlateBlue"><Run FlowDirection="RightToLeft" Language="he-il" Text="מועדפים"/></TextBlock>
         </StackPanel>
-
-        <Button x:Name="btnSave" Content="Save Contact" 
-                Grid.Row="4" Grid.ColumnSpan="2" 
+        <ComboBox x:Name="cityL" Grid.Row="4" Grid.Column="0" ItemsSource="{Binding cities}"/>
+        <Button x:Name="btnSave" Content="הוספה לאנשי קשר" 
+                Grid.Row="4" Grid.Column="1" 
                 Width="200" Height="40" FontSize="20" 
                 Background="LightBlue" Cursor="Hand" Click="btnSave_Click"/>
     </Grid>
