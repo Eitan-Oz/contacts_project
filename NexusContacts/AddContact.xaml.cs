@@ -26,8 +26,8 @@ namespace NexusContacts
             this.DataContext = this;
             int count = cont.ExecuteSelectIntQuery("SELECT COUNT(contID) FROM [Peoples]");
             this.NextContactID = count + 1;
-            CityConnectToDBMathods get = new CityConnectToDBMathods();
-            this.cities = get.GetCityFromDataTable(cont.ExecuteSelectAllQuery("SELECT * FROM [Cities]"));
+            CityDbMethods get = new CityDbMethods();
+            this.cities = get.GetCitiesFromDataTable(cont.ExecuteSelectAllQuery("SELECT * FROM [Cities]"));
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)

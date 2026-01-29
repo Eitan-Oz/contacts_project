@@ -1,4 +1,4 @@
-﻿using NexusContacts.models;
+using NexusContacts.models;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Net.Http;
@@ -94,46 +94,38 @@ namespace NexusContacts
             BaseDal dal = new BaseDal();
             if (!dal.ExecuteSelectBoolQuery("SELECT COUNT(*) FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = 'Cities'"))
             {
-                string sqlsand = "CREATE TABLE [Cities] (\n" +
-                "Id INT IDENTITY(1,1) PRIMARY KEY,\n" +
-                "GovId INT, \n" +
-                "city_code INT,\n" +
-                "city_name_he NVARCHAR(100),\n" +
-                "city_name_en NVARCHAR(100)\n" +
-                ");";
-
-                  dal.ExecuteUpdateQuery(sqlsand);
+                string createTableSql =
+                    "CREATE TABLE [Cities] (" +
+                    "Id INT IDENTITY(1,1) PRIMARY KEY," +
+                    "GovId INT, " +
+                    "city_code INT," +
+                    "city_name_he NVARCHAR(100)," +
+                    "city_name_en NVARCHAR(100)" +
+                    ");";
+                dal.ExecuteUpdateQuery(createTableSql);
             }
-
 
             string url = "https://data.gov.il/api/3/action/datastore_search?resource_id=8f714b6f-c35c-4b40-a0e7-547b675eee0e";
             string jsonResult = await GetGovDataAsync(url);
             if (jsonResult != null)
             {
-                // 1. המרה: הופכים את הטקסט לאובייקטים
                 var data = JsonSerializer.Deserialize<GovApiResponse>(jsonResult);
-
                 if (data != null && data.Result != null)
                 {
-                    // 2. לולאה ושמירה למסד הנתונים
-                    foreach (var city in data.Result.Records)
+                    foreach (CityRecord city in data.Result.Records)
                     {
-                        // המרת סמל היישוב למספר
-                        int codeVal = 0;
-                        int.TryParse(city.CityCode, out codeVal);
+                        // Use city.CityCode directly (it's now int)
+                        int cityCode = city.CityCode;
 
-                        // ניקוי גרשיים כדי לא לשבור את ה-SQL
-                        string safeHebrew = city.NameHebrew != null ? city.NameHebrew.Replace("'", "''") : "";
-                        string safeEnglish = city.NameEnglish != null ? city.NameEnglish.Replace("'", "''") : "";
+                        // Clean strings for SQL
+                        string safeHebrew = string.IsNullOrEmpty(city.NameHebrew) ? string.Empty : city.NameHebrew.Replace("'", "''");
+                        string safeEnglish = string.IsNullOrEmpty(city.NameEnglish) ? string.Empty : city.NameEnglish.Replace("'", "''");
 
-                        // יצירת השאילתה
-                        string insertSql = $"INSERT INTO Cities (city_code, city_name_he, city_name_en) VALUES ({codeVal}, N'{safeHebrew}', N'{safeEnglish}')";
-
-                        // ביצוע השמירה
+                        // Build and execute insert query
+                        string insertSql = $"INSERT INTO Cities (city_code, city_name_he, city_name_en) VALUES ({cityCode}, N'{safeHebrew}', N'{safeEnglish}')";
                         dal.ExecuteInsertQuery(insertSql);
                     }
-
-                    MessageBox.Show($"בוצע בהצלחה! {data.Result.Records.Count} ערים נשמרו.");
+                    MessageBox.Show($"���� ������! {data.Result.Records.Count} ���� �����.");
                 }
             }
         }
