@@ -26,8 +26,8 @@
                    Grid.ColumnSpan="2" FontWeight="Bold"/>
 
         <Grid Grid.Row="1" Grid.Column="0" Margin="10">
-            <TextBox x:Name="txtFirstName" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
-            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
+            <TextBox x:Name="txtFirstName" FontSize="18" VerticalContentAlignment="Center" Padding="5" PreviewTextInput="TextOnlyTextBox_PreviewTextInput"/>
+            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" Height="28">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Visibility" Value="Collapsed"/>
@@ -51,7 +51,7 @@
         </TextBlock>
 
         <Grid Grid.Row="2" Grid.Column="0" Margin="10">
-            <TextBox x:Name="txtLastName" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
+            <TextBox x:Name="txtLastName" FontSize="18" VerticalContentAlignment="Center" Padding="5" PreviewTextInput="TextOnlyTextBox_PreviewTextInput"/>
             <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -66,7 +66,7 @@
         </Grid>
 
         <Grid Grid.Row="2" Grid.Column="1" Margin="10">
-            <TextBox x:Name="txtPhone" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
+            <TextBox x:Name="txtPhone" FontSize="18" VerticalContentAlignment="Center" Padding="5" MaxLength="10" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
             <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -81,7 +81,7 @@
         </Grid>
 
         <Grid Grid.Row="3" Grid.Column="0" Margin="10">
-            <TextBox x:Name="txtAge" FontSize="18" VerticalContentAlignment="Center" Padding="5"/>
+            <TextBox x:Name="txtAge" FontSize="18" MaxLength="3" VerticalContentAlignment="Center" Padding="5" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
             <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
                 <TextBlock.Style>
                     <Style TargetType="{x:Type TextBlock}">
@@ -103,9 +103,8 @@
             </CheckBox>
             <TextBlock FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="DarkSlateBlue"><Run FlowDirection="RightToLeft" Language="he-il" Text="מועדפים"/></TextBlock>
         </StackPanel>
-        <ComboBox x:Name="cityL" Grid.Row="4" Grid.Column="0" ItemsSource="{Binding cities}"/>
         <Button x:Name="btnSave" Content="הוספה לאנשי קשר" 
-                Grid.Row="4" Grid.Column="1" 
+                Grid.Row="4" Grid.ColumnSpan="2" 
                 Width="200" Height="40" FontSize="20" 
                 Background="LightBlue" Cursor="Hand" Click="btnSave_Click"/>
     </Grid>

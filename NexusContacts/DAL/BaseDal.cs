@@ -1,12 +1,15 @@
-﻿using System;
+﻿using NexusContacts.models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 
 namespace NexusContacts
@@ -30,6 +33,32 @@ namespace NexusContacts
 
             // יצירת האובייקט שמייצג את החיבור לדטה בייס
             conn = new SqlConnection(ConnectionString);
+        }
+        public List<Pepole> GetDataFromDataTableToList(DataTable dt)
+        {
+            List<Pepole> students = new List<Pepole>();
+
+            try
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    Pepole s = new Pepole();
+                    s.ContID = row.Field<int>("ContID");
+                    s.FirstName = row.Field<string>("FName");
+                    s.LastName = row.Field<string>("LName");
+                    s.Age = row.Field<byte>("Age");
+                    s.PhoneNumber = row.Field<string>("PhoneNum");
+                    s.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
+                    students.Add(s);
+                }
+                return students;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
+                return students;
+            }
         }
 
         public int ExecuteInsertQuery(string sql)

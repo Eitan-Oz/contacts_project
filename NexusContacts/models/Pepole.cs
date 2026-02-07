@@ -9,16 +9,10 @@ namespace NexusContacts.models
         private string _firstName;
         private string _lastName;
         private string _phoneNumber;
-        private int _cityId;
         private byte? _age;
         private bool? _isFavorite;
 
         public int ContID { get; internal set; }
-        public int CityId
-        {
-            get => _cityId;
-            set { _cityId = value;OnPropertyChanged(); }
-        }
         public string FirstName
         {
             get => _firstName;
@@ -61,9 +55,6 @@ namespace NexusContacts.models
             this.FirstName = Fname;
             this.LastName = Lname;
             this.PhoneNumber = phonNum;
-
-            this.CityId = cityId; // הוספתי את השורה הזו
-
             this.Age = age;
             this.IsFavorite = favo;
         }

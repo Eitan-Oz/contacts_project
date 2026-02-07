@@ -23,7 +23,7 @@ namespace NexusContacts
             {
                 string sql = "SELECT * FROM Peoples";
                 BaseDal dal = new BaseDal();
-               people  = GetStudentsFromDataTable(dal.ExecuteSelectAllQuery(sql));
+               people  = dal.GetDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
                 dgContacts.ItemsSource = people;
             }
             catch (Exception ex)
@@ -46,33 +46,6 @@ namespace NexusContacts
         }
 
 
-        private List<Pepole> GetStudentsFromDataTable(DataTable dt)
-        {
-            List<Pepole> students = new List<Pepole>();
-
-            try
-            {
-                foreach (DataRow row in dt.Rows)
-                {
-                    Pepole s = new Pepole();
-                    s.ContID = row.Field<int>("ContID");
-                    s.FirstName = row.Field<string>("FName");
-                    s.LastName = row.Field<string>("LName");
-                    s.Age = row.Field<byte>("Age");
-                    s.PhoneNumber = row.Field<string>("PhoneNum");
-                    s.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
-                    students.Add(s);
-                }
-                return students;
-            }
-            catch (Exception ex)
-            {
-               SummonScaryError();
-                MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                Debug.WriteLine(ex);
-                return students;
-            }
-        }
         private void SummonScaryError()
         {
             // 1. יצירת ה-Grid הראשי שיכסה את הכל

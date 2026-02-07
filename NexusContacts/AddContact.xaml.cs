@@ -1,4 +1,4 @@
-using NexusContacts.models;
+﻿using NexusContacts.models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,7 +18,6 @@ namespace NexusContacts
     public partial class AddContact : Window
     {
         public int NextContactID { get; set; }
-        public List<CityRecord> cities { get; set; }
         public AddContact()
         {
             InitializeComponent();
@@ -26,8 +25,6 @@ namespace NexusContacts
             this.DataContext = this;
             int count = cont.ExecuteSelectIntQuery("SELECT COUNT(contID) FROM [Peoples]");
             this.NextContactID = count + 1;
-            CityDbMethods get = new CityDbMethods();
-            this.cities = get.GetCitiesFromDataTable(cont.ExecuteSelectAllQuery("SELECT * FROM [Cities]"));
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -39,11 +36,47 @@ namespace NexusContacts
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
-            string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
+            if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'"))
+            {
+                MessageBoxResult  saveResult =MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                  if (saveResult==MessageBoxResult.Yes)
+                {
+                    if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'")) 
+                    { 
+                    }
+                        string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
                          $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue})";
-            baseDal.ExecuteInsertQuery(sql);
-            MessageBox.Show("Contact added");
-            this.Close();
+                    baseDal.ExecuteInsertQuery(sql);
+                    MessageBox.Show("Contact added");
+                    this.Close();
+                }
+                else
+                {
+                    MessageBoxResult result = MessageBox.Show("Do you want to chaing the contect informasion?", "close or continue?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                }
+            }
+            else
+            {
+                string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
+                         $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue})";
+                baseDal.ExecuteInsertQuery(sql);
+                MessageBox.Show("Contact added");
+                this.Close();
+            }
+            
+
+            
+        }
+
+        private void NumericTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        private void TextOnlyTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
+        {
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^a-z A-Z א-ת]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }
