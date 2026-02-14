@@ -73,21 +73,6 @@ namespace NexusContacts
             favoriteShow.Show();
             this.Close();
         }
-        private static readonly HttpClient client = new HttpClient();
-        public async Task<string> GetGovDataAsync(string APIUrl)
-        {
-            try
-            {
-                HttpResponseMessage response = await client.GetAsync(APIUrl);
-                response.EnsureSuccessStatusCode();
-                string responseBody = await response.Content.ReadAsStringAsync();
-                return responseBody;
-            }
-            catch (HttpRequestException e)
-            {
-                MessageBox.Show($"Request exception: {e.Message}");
-                return null;
-            }
-        }
+        
     }
 }
