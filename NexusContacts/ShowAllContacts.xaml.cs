@@ -107,6 +107,23 @@ namespace NexusContacts
 
         }
 
+        private void DeleteCont(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditCont(object sender, RoutedEventArgs e)
+        {
+            if (dgContacts.SelectedIndex >= 0)
+            {
+                int index = dgContacts.SelectedIndex;
+                Pepole savePersone = people[index];
+                EditContactWin co = new EditContactWin(savePersone);
+                co.Show();
+                this.Close();
+            }
+        }
+
         /* private void RunCmdCommand(string command)
          {
              ProcessStartInfo startInfo = new ProcessStartInfo();

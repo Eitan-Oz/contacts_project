@@ -19,7 +19,11 @@
               AlternatingRowBackground="#F2F2F2"
               BorderBrush="LightGray"
               BorderThickness="1">
-
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit" Click="EditCont"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>
 </Window>
