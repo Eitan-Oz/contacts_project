@@ -30,7 +30,7 @@ namespace NexusContacts
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string Fname= txtFirstName.Text.ToString();
+            string Fname = txtFirstName.Text.ToString();
             string Lname = txtLastName.Text.ToString();
             byte age = byte.Parse(txtAge.Text.ToString());
             string phoneNum = txtPhone.Text.ToString();
@@ -39,14 +39,16 @@ namespace NexusContacts
             BaseDal baseDal = new BaseDal();
             if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'"))
             {
-                MessageBoxResult  saveResult =MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                  if (saveResult==MessageBoxResult.Yes)
+                MessageBoxResult saveResult = MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (saveResult == MessageBoxResult.Yes)
                 {
-                    if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'")) 
-                    { 
+                    if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'"))
+                    {
                     }
-                        string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
-                         $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue})";
+
+                    string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
+                     $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
+                     $"{App.allCities[cmbCity.SelectedIndex].CityID})";
                     baseDal.ExecuteInsertQuery(sql);
                     MessageBox.Show("Contact added");
                     this.Close();
@@ -64,9 +66,9 @@ namespace NexusContacts
                 MessageBox.Show("Contact added");
                 this.Close();
             }
-            
 
-            
+
+
         }
 
         private void NumericTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
