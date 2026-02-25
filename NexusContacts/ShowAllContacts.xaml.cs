@@ -124,6 +124,16 @@ namespace NexusContacts
             }
         }
 
+        private void GoBack(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+               MainWindow main = new MainWindow();
+                main.Show();
+                this.Close();
+            }
+        }
+
         /* private void RunCmdCommand(string command)
          {
              ProcessStartInfo startInfo = new ProcessStartInfo();
