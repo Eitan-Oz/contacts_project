@@ -106,6 +106,7 @@
     <Compile Include="EditContact.xaml.cs">
       <DependentUpon>EditContact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="models\City.cs" />
     <Compile Include="ShowAllContacts.xaml.cs">
       <DependentUpon>ShowAllContacts.xaml</DependentUpon>
     </Compile>

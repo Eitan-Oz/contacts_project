@@ -11,8 +11,18 @@ namespace NexusContacts.models
         private string _phoneNumber;
         private byte? _age;
         private bool? _isFavorite;
+        private City _city;
+
+
 
         public int ContID { get; internal set; }
+
+        public City City
+        {
+            get => _city;
+            set { _city = value; OnPropertyChanged(); }
+        }
+
         public string FirstName
         {
             get => _firstName;

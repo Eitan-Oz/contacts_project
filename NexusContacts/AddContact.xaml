@@ -103,9 +103,21 @@
             </CheckBox>
             <TextBlock FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="DarkSlateBlue"><Run FlowDirection="RightToLeft" Language="he-il" Text="מועדפים"/></TextBlock>
         </StackPanel>
-        <Button x:Name="btnSave" Content="הוספה לאנשי קשר" 
-                Grid.Row="4" Grid.ColumnSpan="2" 
-                Width="200" Height="40" FontSize="20" 
-                Background="LightBlue" Cursor="Hand" Click="btnSave_Click"/>
+        <StackPanel Grid.Row="4" Grid.Column="0" >
+            <ComboBox x:Name="cmbCity"  FontSize="20" Height="82" Width="298"/>
+            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
+                <TextBlock.Style>
+                    <Style TargetType="{x:Type TextBlock}">
+                        <Setter Property="Visibility" Value="Collapsed"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding SelectedItem, ElementName=cmbCity}" Value="{x:Null}">
+                                <Setter Property="Visibility" Value="Visible"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="עיר"/></TextBlock>
+        </StackPanel>
+
     </Grid>
+
 </Window>
