@@ -23,7 +23,7 @@ namespace NexusContacts
             {
                 string sql = "SELECT * FROM Peoples";
                 BaseDal dal = new BaseDal();
-               people  = dal.GetDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
+               people  = dal.GetPepoleDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
                 dgContacts.ItemsSource = people;
             }
             catch (Exception ex)

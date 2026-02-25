@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NexusContacts.models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,6 +14,8 @@ namespace NexusContacts
     /// </summary>
     public partial class App : Application
     {
+        private static BaseDal dal = new BaseDal();
+        readonly  public static List<City> allCities = dal.GetCityDataFromDataTableToList(dal.ExecuteSelectAllQuery("SELECT * FROM Cities"));
 
     }
 }

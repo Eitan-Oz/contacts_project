@@ -5,119 +5,198 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NexusContacts"
         mc:Ignorable="d"
-        Title="Add New Contact" Height="550" Width="800">
-    <Grid Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+        Title="הוספת איש קשר חדש" Height="550" Width="800"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI"
+        FlowDirection="RightToLeft">
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#F5F7FA"/>
+        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextGray" Color="#7F8C8D"/>
 
-        <TextBlock Text="Add New Contact" 
-                   FontSize="30" 
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FAFAFA"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="Background" Value="#FFFFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="#4A90E2" Opacity="0.3" BlurRadius="5"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FAFAFA"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+        </Style>
+
+    </Window.Resources>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#E6E9F0" Offset="0"/>
+            <GradientStop Color="#EEF1F5" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Border Background="{StaticResource CardBackground}" 
+            CornerRadius="15" 
+            Margin="30" 
+            Padding="20">
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="20" ShadowDepth="5" Opacity="0.1" Color="Black"/>
+        </Border.Effect>
+
+        <Grid FlowDirection="RightToLeft">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.8*"/>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="1.2*"/>
+                <RowDefinition Height="1.5*"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Text="Add New Contact" 
+                   FontSize="32" 
+                   Foreground="#2C3E50"
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center" 
-                   Grid.ColumnSpan="2" FontWeight="Bold"/>
+                   Grid.ColumnSpan="2" 
+                   FontWeight="SemiBold">
+                <TextBlock.Effect>
+                    <DropShadowEffect ShadowDepth="2" Direction="320" Color="Gray" Opacity="0.2" BlurRadius="2"/>
+                </TextBlock.Effect>
+            </TextBlock>
 
-        <Grid Grid.Row="1" Grid.Column="0" Margin="10">
-            <TextBox x:Name="txtFirstName" FontSize="18" VerticalContentAlignment="Center" Padding="5" PreviewTextInput="TextOnlyTextBox_PreviewTextInput"/>
-            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0" Height="28">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=txtFirstName}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="שם פרטי"/><LineBreak/><Run FlowDirection="RightToLeft" Language="he-il"/></TextBlock>
+            <Grid Grid.Row="1" Grid.Column="0" Margin="15">
+                <TextBox x:Name="txtFirstName" FontSize="16" PreviewTextInput="TextOnlyTextBox_PreviewTextInput"/>
+                <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=txtFirstName}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <Run Text="שם פרטי"/>
+                </TextBlock>
+            </Grid>
+
+            <Border Grid.Row="1" Grid.Column="1" Background="#F0F8FF" CornerRadius="10" Margin="20" Height="50" VerticalAlignment="Center">
+                <TextBlock x:Name="ContactID" 
+                       FontSize="20"
+                       Foreground="{StaticResource PrimaryColor}"
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center" 
+                       FontWeight="Bold">
+                    <TextBlock.Text>
+                        <Binding Path="NextContactID" StringFormat="ID: {0}"/>
+                    </TextBlock.Text>
+                </TextBlock>
+            </Border>
+
+            <Grid Grid.Row="2" Grid.Column="0" Margin="15">
+                <TextBox x:Name="txtLastName" FontSize="16" PreviewTextInput="TextOnlyTextBox_PreviewTextInput"/>
+                <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=txtLastName}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <Run Text="שם משפחה"/>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" Margin="15">
+                <TextBox x:Name="txtPhone" FontSize="16" MaxLength="10" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=txtPhone}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <Run Text="מספר טלפון"/>
+                </TextBlock>
+            </Grid>
+
+            <Grid Grid.Row="3" Grid.Column="0" Margin="15">
+                <TextBox x:Name="txtAge" FontSize="16" MaxLength="3" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
+                <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                    <TextBlock.Style>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Text, ElementName=txtAge}" Value="">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                    <Run Text="גיל"/>
+                </TextBlock>
+            </Grid>
+
+            <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" FlowDirection="RightToLeft">
+                <CheckBox x:Name="chkIsFavorite" VerticalAlignment="Center" Cursor="Hand">
+                    <CheckBox.RenderTransform>
+                        <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
+                    </CheckBox.RenderTransform>
+                </CheckBox>
+                <TextBlock FontSize="18" Margin="15,0,0,0" VerticalAlignment="Center" Foreground="#555" FontWeight="SemiBold">
+                    <Run Text="הוסף למועדפים"/>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="בחר עיר מגורים:" FontSize="14" Foreground="#888" Margin="0,0,0,5" HorizontalAlignment="Right"/>
+                <ComboBox x:Name="cmbCity" ItemsSource="{Binding citiesName}" FontSize="18" Height="50" Width="350" 
+                          FlowDirection="RightToLeft" IsEditable="True" IsTextSearchCaseSensitive="True" 
+                          Padding="10,0"/>
+            </StackPanel>
+
         </Grid>
-
-        <TextBlock x:Name="ContactID" 
-                   FontSize="25"
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center" 
-                   Grid.Row="1" Grid.Column="1">
-            <TextBlock.Text>
-                <Binding Path="NextContactID" StringFormat="ID: {0}"/>
-            </TextBlock.Text>
-        </TextBlock>
-
-        <Grid Grid.Row="2" Grid.Column="0" Margin="10">
-            <TextBox x:Name="txtLastName" FontSize="18" VerticalContentAlignment="Center" Padding="5" PreviewTextInput="TextOnlyTextBox_PreviewTextInput"/>
-            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=txtLastName}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="שם משפחה"/><LineBreak/><Run FlowDirection="RightToLeft" Language="he-il"/></TextBlock>
-        </Grid>
-
-        <Grid Grid.Row="2" Grid.Column="1" Margin="10">
-            <TextBox x:Name="txtPhone" FontSize="18" VerticalContentAlignment="Center" Padding="5" MaxLength="10" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
-            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=txtPhone}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="מספר טלפון"/></TextBlock>
-        </Grid>
-
-        <Grid Grid.Row="3" Grid.Column="0" Margin="10">
-            <TextBox x:Name="txtAge" FontSize="18" MaxLength="3" VerticalContentAlignment="Center" Padding="5" PreviewTextInput="NumericTextBox_PreviewTextInput"/>
-            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Text, ElementName=txtAge}" Value="">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="גיל"/></TextBlock>
-        </Grid>
-
-        <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="20,0,0,0">
-            <CheckBox x:Name="chkIsFavorite" VerticalAlignment="Center">
-                <CheckBox.RenderTransform>
-                    <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                </CheckBox.RenderTransform>
-            </CheckBox>
-            <TextBlock FontSize="18" Margin="10,0,0,0" VerticalAlignment="Center" Foreground="DarkSlateBlue"><Run FlowDirection="RightToLeft" Language="he-il" Text="מועדפים"/></TextBlock>
-        </StackPanel>
-        <StackPanel Grid.Row="4" Grid.Column="0" >
-            <ComboBox x:Name="cmbCity"  FontSize="20" Height="82" Width="298"/>
-            <TextBlock FontSize="18" Foreground="Gray" IsHitTestVisible="False" VerticalAlignment="Center" Margin="10,0,0,0">
-                <TextBlock.Style>
-                    <Style TargetType="{x:Type TextBlock}">
-                        <Setter Property="Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding SelectedItem, ElementName=cmbCity}" Value="{x:Null}">
-                                <Setter Property="Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBlock.Style><Run FlowDirection="RightToLeft" Language="he-il" Text="עיר"/></TextBlock>
-        </StackPanel>
-
-    </Grid>
-
+    </Border>
 </Window>

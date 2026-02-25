@@ -6,12 +6,24 @@ using System.Threading.Tasks;
 
 namespace NexusContacts.models
 {
-    internal class City
+    public class City
     {
         private int _cityID;
         private string _cityNameEn;
         private string _cityNameHe;
 
+
+        public City()
+        {
+
+        }
+        
+        public City(int cityID, string cityNameEn, string cityNameHe)
+        {
+            _cityID = cityID;
+            _cityNameEn = cityNameEn;
+            _cityNameHe = cityNameHe;
+        }
         public int CityID
         {
             get => _cityID;

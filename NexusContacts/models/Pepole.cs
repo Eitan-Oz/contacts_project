@@ -19,7 +19,7 @@ namespace NexusContacts.models
 
         public City City
         {
-            get => _city;
+             get => _city;
             set { _city = value; OnPropertyChanged(); }
         }
 
@@ -59,7 +59,7 @@ namespace NexusContacts.models
         }
 
         // הוספתי את cityId לרשימת הפרמטרים
-        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo)
+        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,City city)
         {
             this.ContID = ID;
             this.FirstName = Fname;
@@ -67,6 +67,7 @@ namespace NexusContacts.models
             this.PhoneNumber = phonNum;
             this.Age = age;
             this.IsFavorite = favo;
+            this._city = city;
         }
 
 
