@@ -24,8 +24,7 @@ namespace NexusContacts
             BaseDal cont = new BaseDal();
             this.DataContext = this;
             int count = cont.ExecuteSelectIntQuery("SELECT COUNT(contID) FROM [Peoples]");
-            List<City> citiesName= App.allCities;
-            cmbCity.ItemsSource = citiesName.Select(c => c.CityNameHe).ToList();
+            cmbCity.ItemsSource = App.allCities.Select(c => c.CityNameHe).ToList();
             this.NextContactID = count + 1;
         }
 
