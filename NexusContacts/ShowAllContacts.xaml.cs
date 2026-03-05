@@ -23,7 +23,7 @@ namespace NexusContacts
             {
                 string sql = "SELECT * FROM Peoples";
                 BaseDal dal = new BaseDal();
-               people  = dal.GetDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
+               people  = dal.GetPepoleDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
                 dgContacts.ItemsSource = people;
             }
             catch (Exception ex)
@@ -105,6 +105,33 @@ namespace NexusContacts
             }
 
 
+        }
+
+        private void DeleteCont(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void EditCont(object sender, RoutedEventArgs e)
+        {
+            if (dgContacts.SelectedIndex >= 0)
+            {
+                int index = dgContacts.SelectedIndex;
+                Pepole savePersone = people[index];
+                EditContactWin co = new EditContactWin(savePersone);
+                co.Show();
+                this.Close();
+            }
+        }
+
+        private void GoBack(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+               MainWindow main = new MainWindow();
+                main.Show();
+                this.Close();
+            }
         }
 
         /* private void RunCmdCommand(string command)

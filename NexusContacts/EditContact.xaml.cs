@@ -20,17 +20,19 @@ namespace NexusContacts
     /// </summary>
     public partial class EditContactWin : Window
     {
+        public Pepole p;
         public int tContactID { get; set; }
         public EditContactWin(Pepole p)
         {
             InitializeComponent();
-            this.tContactID = p.ContID;
-            this.DataContext = this;
-            txtFirstName.Text = p.FirstName;
-            txtAge.Text = p.Age.ToString();
-            txtLastName.Text = p.LastName;
-            txtPhone.Text = p.PhoneNumber;
-            chkIsFavorite.IsChecked = p.IsFavorite;
+            //this.tContactID = p.ContID;
+            this.p = p;
+            this.DataContext = p ;
+            //txtFirstName.Text = p.FirstName;
+            //txtAge.Text = p.Age.ToString();
+            //txtLastName.Text = p.LastName;
+            //txtPhone.Text = p.PhoneNumber;
+            //chkIsFavorite.IsChecked = p.IsFavorite;
 
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)

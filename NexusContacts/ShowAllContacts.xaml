@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NexusContacts"
         mc:Ignorable="d"
-        Title="ShowAllContacts" Height="450" Width="800">
+        Title="ShowAllContacts" Height="450" Width="800"
+        PreviewKeyUp="GoBack">
     <Grid Margin="10">
         <DataGrid x:Name="dgContacts" 
               CanUserAddRows="False" 
@@ -19,7 +20,11 @@
               AlternatingRowBackground="#F2F2F2"
               BorderBrush="LightGray"
               BorderThickness="1">
-
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Edit" Click="EditCont"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>
 </Window>

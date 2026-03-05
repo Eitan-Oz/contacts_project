@@ -34,7 +34,7 @@ namespace NexusContacts
             // יצירת האובייקט שמייצג את החיבור לדטה בייס
             conn = new SqlConnection(ConnectionString);
         }
-        public List<Pepole> GetDataFromDataTableToList(DataTable dt)
+        public List<Pepole> GetPepoleDataFromDataTableToList(DataTable dt)
         {
             List<Pepole> students = new List<Pepole>();
 
@@ -58,6 +58,29 @@ namespace NexusContacts
                 MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Debug.WriteLine(ex);
                 return students;
+            }
+        }
+        public List<City> GetCityDataFromDataTableToList(DataTable dt)
+        {
+            List<City> cities = new List<City>();
+
+            try
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    City ci = new City();
+                    ci.CityID = row.Field<int>("CityID");
+                    ci.CityNameEn = row.Field<string>("city_name_en");
+                    ci.CityNameHe = row.Field<string>("city_name_he");
+                    cities.Add(ci);
+                }
+                return cities;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
+                return cities;
             }
         }
 

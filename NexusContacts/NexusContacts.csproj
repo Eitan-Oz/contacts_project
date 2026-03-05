@@ -106,6 +106,7 @@
     <Compile Include="EditContact.xaml.cs">
       <DependentUpon>EditContact.xaml</DependentUpon>
     </Compile>
+    <Compile Include="models\City.cs" />
     <Compile Include="ShowAllContacts.xaml.cs">
       <DependentUpon>ShowAllContacts.xaml</DependentUpon>
     </Compile>
@@ -187,6 +188,7 @@
     <Content Include="DAL\Database1_log.ldf">
       <DependentUpon>Database1.mdf</DependentUpon>
     </Content>
+    <Content Include="scripts\Create Cities Table.sql" />
     <Content Include="scripts\Create Peoples Table.sql" />
   </ItemGroup>
   <ItemGroup />

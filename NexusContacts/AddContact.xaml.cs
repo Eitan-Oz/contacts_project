@@ -24,48 +24,62 @@ namespace NexusContacts
             BaseDal cont = new BaseDal();
             this.DataContext = this;
             int count = cont.ExecuteSelectIntQuery("SELECT COUNT(contID) FROM [Peoples]");
+            cmbCity.ItemsSource = App.allCities.Select(c => c.CityNameHe).ToList();
             this.NextContactID = count + 1;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            string Fname= txtFirstName.Text.ToString();
+            string Fname = txtFirstName.Text.ToString();
             string Lname = txtLastName.Text.ToString();
-            byte age = byte.Parse(txtAge.Text.ToString());
+            if (!byte.TryParse(txtAge.Text.ToString(), out byte age)||age>120)
+            {
+                MessageBox.Show("Please enter a valid age.");
+                return;
+            }
             string phoneNum = txtPhone.Text.ToString();
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
             if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'"))
             {
-                MessageBoxResult  saveResult =MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                  if (saveResult==MessageBoxResult.Yes)
+                MessageBoxResult saveResult = MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (saveResult == MessageBoxResult.Yes)
                 {
-                    if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'")) 
-                    { 
-                    }
-                        string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
-                         $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue})";
+                    
+
+                    string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
+                     $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
+                     $"{App.allCities[cmbCity.SelectedIndex].CityID})";
                     baseDal.ExecuteInsertQuery(sql);
                     MessageBox.Show("Contact added");
                     this.Close();
                 }
                 else
                 {
-                    MessageBoxResult result = MessageBox.Show("Do you want to chaing the contect informasion?", "close or continue?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    MessageBoxResult result = MessageBox.Show("Do you want to change the contact information?", "Close or continue?", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        // User wants to change the contact information, so we do nothing and allow them to edit the fields
+                    }
+                    else
+                    {
+                        this.Close();
+                    }
                 }
             }
             else
             {
-                string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ]) " +
-                         $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue})";
+                string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
+                     $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
+                     $"{App.allCities[cmbCity.SelectedIndex].CityID})";
                 baseDal.ExecuteInsertQuery(sql);
                 MessageBox.Show("Contact added");
                 this.Close();
             }
-            
 
-            
+
+
         }
 
         private void NumericTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
