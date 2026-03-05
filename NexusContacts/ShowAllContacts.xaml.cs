@@ -110,7 +110,15 @@ namespace NexusContacts
 
         private void DeleteCont(object sender, RoutedEventArgs e)
         {
-
+            if (dgContacts.SelectedIndex >= 0)
+            {
+                int index = dgContacts.SelectedIndex;
+                Pepole save = people[index];
+                BaseDal dal = new BaseDal();
+                dal.ExecuteDeleteQuery($"DELETE FROM [Peoples] WHERE contID = {save.ContID}");
+                MessageBox.Show("Contact deleted");
+                
+            }   
         }
 
         private void EditCont(object sender, RoutedEventArgs e)
