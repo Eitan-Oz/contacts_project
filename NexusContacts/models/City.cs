@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,7 +11,7 @@ namespace NexusContacts.models
         private int _cityID;
         private string _cityNameEn;
         private string _cityNameHe;
-
+        
 
         public City()
         {

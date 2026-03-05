@@ -1,4 +1,4 @@
-Ôªøusing NexusContacts.models;
+using NexusContacts.models;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Shapes;
 
 namespace NexusContacts
@@ -82,6 +83,15 @@ namespace NexusContacts
 
         }
 
+        private void GoBack(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                MainWindow main = new MainWindow();
+                main.Show();
+                this.Close();
+            }
+        }
         private void NumericTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
             System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^0-9]+");
@@ -89,7 +99,7 @@ namespace NexusContacts
         }
         private void TextOnlyTextBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^a-z A-Z ◊ê-◊™]+");
+            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("[^a-z A-Z ‡-˙]+");
             e.Handled = regex.IsMatch(e.Text);
         }
     }

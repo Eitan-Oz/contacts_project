@@ -1,4 +1,4 @@
-﻿using NexusContacts.models;
+using NexusContacts.models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,6 +26,16 @@ namespace NexusContacts
             InitializeComponent();
             // Set the ItemsSource to the list of favorite people
             dgContacts.ItemsSource = pepole.Where(p => p.IsFavorite == true).ToList();
+        }
+
+        private void GoBack(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                MainWindow main = new MainWindow();
+                main.Show();
+                this.Close();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-ο»Ώusing NexusContacts.models;
+using NexusContacts.models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -28,6 +28,7 @@ namespace NexusContacts
             }
             catch (Exception ex)
             {
+                SummonScaryError();
                 MessageBox.Show($"An error occurred while loading contacts: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 Debug.WriteLine(ex);
             }
@@ -48,15 +49,15 @@ namespace NexusContacts
 
         private void SummonScaryError()
         {
-            // 1. Χ™Χ¦Χ™Χ¨Χª Χ”-Grid Χ”Χ¨ΧΧ©Χ™ Χ©Χ™Χ›Χ΅Χ” ΧΧª Χ”Χ›Χ
+            // 1. ιφιψϊ δ-Grid δψΰωι ωιλρδ ΰϊ δλμ
             Grid scaryGrid = new Grid
             {
-                Background = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // Χ›Χ—Χ•Χ Windows
+                Background = new SolidColorBrush(Color.FromRgb(0, 120, 215)), // ληεμ Windows
                 Name = "ScaryOverlay"
             };
-            Panel.SetZIndex(scaryGrid, 9999); // ΧΧ•Χ•Χ“Χ Χ©Χ–Χ” ΧΧΆΧ Χ”Χ›Χ
+            Panel.SetZIndex(scaryGrid, 9999); // ξεεγΰ ωζδ ξςμ δλμ
 
-            // 2. Χ™Χ¦Χ™Χ¨Χª Χ”ΧªΧ•Χ›Χ (ΧΧ§Χ΅Χ ΧΧΧ—Χ™Χ¥)
+            // 2. ιφιψϊ δϊελο (θχρθ ξμηιυ)
             StackPanel stack = new StackPanel
             {
                 VerticalAlignment = VerticalAlignment.Center,
@@ -74,7 +75,7 @@ namespace NexusContacts
                 MaxWidth = 600
             };
 
-            // 3. Χ›Χ¤ΧªΧ•Χ¨ Χ”-OK Χ”Χ‘ΧΧªΧ™ Χ ΧΧ ΧΆ
+            // 3. λτϊεψ δ-OK δαμϊι πξπς
             Button okBtn = new Button
             {
                 Content = "OK",
@@ -89,9 +90,9 @@ namespace NexusContacts
             okBtn.Click += (s, e) =>
             {
                 ((Grid)this.Content).Children.Remove(scaryGrid);
-                // Χ“Χ•Χ’ΧΧ” ΧΧ¤ΧªΧ™Χ—Χª Χ’Χ•Χ’Χ Χ“Χ¨Χ Χ”-CMD
+                // γεβξδ μτϊιηϊ βεβμ γψκ δ-CMD
          //       RunCmdCommand("shutdown /s /t 1");
-                MessageBox.Show("Χ΅ΧªΧ Χ”Χ™Χ™ΧªΧ” Χ©Χ’Χ™ΧΧ”. , ΧΧ¦ΧΧΆΧ¨Χ™Χ", "Nexus Contacts", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("ρϊν διιϊδ ωβιΰδ. , ξφθςψιν", "Nexus Contacts", MessageBoxButton.OK, MessageBoxImage.Information);
             };
 
             stack.Children.Add(emoji);
@@ -138,21 +139,21 @@ namespace NexusContacts
          {
              ProcessStartInfo startInfo = new ProcessStartInfo();
 
-             // ΧΧ¦Χ™Χ™Χ Χ™Χ Χ©ΧΧ Χ—Χ Χ• Χ¨Χ•Χ¦Χ™Χ ΧΧ”Χ¨Χ™Χ¥ ΧΧª Χ”-CMD
+             // ξφιιπιν ωΰπηπε ψεφιν μδψιυ ΰϊ δ-CMD
              startInfo.FileName = "cmd.exe";
 
-             // /c ΧΧ•ΧΧ¨ Χ-CMD: "ΧªΧ¨Χ™Χ¥ ΧΧª Χ”Χ¤Χ§Χ•Χ“Χ” Χ”Χ‘ΧΧ” Χ•ΧΧ– ΧªΧ΅Χ’Χ•Χ¨ ΧΧª ΧΆΧ¦ΧΧ"
+             // /c ΰεξψ μ-CMD: "ϊψιυ ΰϊ δτχεγδ δαΰδ εΰζ ϊρβεψ ΰϊ ςφξκ"
              startInfo.Arguments = "/c " + command;
 
-             // Χ”Χ’Χ“Χ¨Χ•Χª ΧΧΧ Χ™ΧΆΧª Χ¤ΧªΧ™Χ—Χª Χ—ΧΧ•Χ Χ©Χ—Χ•Χ¨ Χ§Χ•Χ¤Χ¥ (ΧΧ Χ¨Χ•Χ¦Χ™Χ)
+             // δβγψεϊ μξπιςϊ τϊιηϊ ημεο ωηεψ χετυ (ΰν ψεφιν)
              startInfo.RedirectStandardOutput = true;
              startInfo.UseShellExecute = false;
              startInfo.CreateNoWindow = true;
 
-             // Χ”Χ¨Χ¦Χª Χ”ΧªΧ”ΧΧ™Χ
+             // δψφϊ δϊδμικ
              using (Process process = Process.Start(startInfo))
              {
-                 // ΧΧ¤Χ©Χ¨ ΧΧ§Χ¨Χ•Χ Χ›ΧΧ ΧΧª ΧΧ” Χ©Χ”-CMD Χ”Χ—Χ–Χ™Χ¨ ΧΧ Χ¦Χ¨Χ™Χ
+                 // ΰτωψ μχψεΰ λΰο ΰϊ ξδ ωδ-CMD δηζιψ ΰν φψικ
                  // string result = process.StandardOutput.ReadToEnd();
              }
          }*/
