@@ -42,7 +42,9 @@ namespace NexusContacts
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
-            if (baseDal.ExecuteSelectBoolQuery($"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'"))
+            string sql1 = $"SELECT COUNT(*) FROM [Peoples] WHERE [FName] = N'{Fname}' OR [LName] = N'{Lname}'";
+            bool isDuplicate = baseDal.ExecuteSelectBoolQuery(sql1);
+            if (isDuplicate)
             {
                 MessageBoxResult saveResult = MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (saveResult == MessageBoxResult.Yes)
@@ -71,9 +73,10 @@ namespace NexusContacts
             }
             else
             {
+                int cityID = App.allCities[cmbCity.SelectedIndex].CityID;   
                 string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
                      $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
-                     $"{App.allCities[cmbCity.SelectedIndex].CityID})";
+                     $"{cityID})";
                 baseDal.ExecuteInsertQuery(sql);
                 MessageBox.Show("Contact added");
                 this.Close();

@@ -1,4 +1,4 @@
-﻿using NexusContacts.models;
+using NexusContacts.models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,19 +20,19 @@ namespace NexusContacts
     /// </summary>
     public partial class EditContactWin : Window
     {
-        public Pepole p;
-        public int tContactID { get; set; }
+        public Pepole P;
+       // public int tContactID { get; set; }
         public EditContactWin(Pepole p)
         {
             InitializeComponent();
             //this.tContactID = p.ContID;
-            this.p = p;
-            this.DataContext = p ;
-            //txtFirstName.Text = p.FirstName;
-            //txtAge.Text = p.Age.ToString();
-            //txtLastName.Text = p.LastName;
-            //txtPhone.Text = p.PhoneNumber;
-            //chkIsFavorite.IsChecked = p.IsFavorite;
+            this.P = p;
+            this.DataContext = P ;
+            txtFirstName.Text = p.FirstName;
+            txtAge.Text = p.Age.ToString();
+            txtLastName.Text = p.LastName;
+            txtPhone.Text = p.PhoneNumber;
+            chkIsFavorite.IsChecked = p.IsFavorite;
 
         }
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -46,7 +46,7 @@ namespace NexusContacts
             BaseDal baseDal = new BaseDal();
             string sql = $"UPDATE [Peoples]\n" +
                 $"SET Fname = N'{Fname}', Lname = N'{Lname}', PhoneNum = '{phoneNum}', age = {age}, IsFavorite = {favSqlValue}\n" +
-                $"WHERE  contID ={tContactID}";
+                $"WHERE  contID ={P.ContID}";
             baseDal.ExecuteUpdateQuery(sql);
             MessageBox.Show("Contact edited");
             MainWindow window = new MainWindow();

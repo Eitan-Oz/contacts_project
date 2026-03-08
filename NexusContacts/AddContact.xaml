@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NexusContacts"
         mc:Ignorable="d"
-        Title="הוספת איש קשר חדש" Height="600" Width="800"
+        Title="Add Contact" Height="600" Width="800"
         WindowStartupLocation="CenterScreen"
         FontFamily="Segoe UI"
         FlowDirection="RightToLeft"
@@ -153,7 +153,7 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
-                        <Run Text="שם פרטי"/>
+                        <Run Text="First Name"/>
                     </TextBlock>
                 </Grid>
 
@@ -183,7 +183,7 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
-                        <Run Text="שם משפחה"/>
+                        <Run Text="Last Name"/>
                     </TextBlock>
                 </Grid>
 
@@ -200,7 +200,7 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
-                        <Run Text="מספר טלפון"/>
+                        <Run Text="Phone Number"/>
                     </TextBlock>
                 </Grid>
 
@@ -217,7 +217,7 @@
                                 </Style.Triggers>
                             </Style>
                         </TextBlock.Style>
-                        <Run Text="גיל"/>
+                        <Run Text="Age"/>
                     </TextBlock>
                 </Grid>
 
@@ -228,19 +228,19 @@
                         </CheckBox.RenderTransform>
                     </CheckBox>
                     <TextBlock FontSize="18" Margin="15,0,0,0" VerticalAlignment="Center" Foreground="#555" FontWeight="SemiBold">
-                        <Run Text="הוסף למועדפים"/>
+                        <Run Text="Favorite"/>
                     </TextBlock>
                 </StackPanel>
 
                 <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <TextBlock Text="בחר עיר מגורים:" FontSize="14" Foreground="#888" Margin="0,0,0,5" HorizontalAlignment="Right"/>
+                    <TextBlock Text="Select City:" FontSize="14" Foreground="#888" Margin="0,0,0,5" HorizontalAlignment="Right"/>
                     <ComboBox x:Name="cmbCity" ItemsSource="{Binding citiesName}" FontSize="18" Height="50" Width="350" 
                           FlowDirection="RightToLeft" IsEditable="True" IsTextSearchCaseSensitive="True" 
                           Padding="10,0"/>
                 </StackPanel>
 
                 <Button Grid.Row="5" Grid.ColumnSpan="2" 
-                        Content="שמור איש קשר"
+                        Content="Save Contact"
                         Style="{StaticResource SaveButtonStyle}"
                         Width="220" Height="50"
                         Margin="0,15,0,0"
