@@ -49,6 +49,7 @@ namespace NexusContacts
                     s.Age = row.Field<byte>("Age");
                     s.PhoneNumber = row.Field<string>("PhoneNum");
                     s.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
+                    s.CityId = row.Field<int>("CityID");
                     students.Add(s);
                 }
                 return students;

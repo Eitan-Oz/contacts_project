@@ -39,7 +39,7 @@ namespace NexusContacts
                 return;
             }
             string phoneNum = txtPhone.Text.ToString();
-            int cityID = cmbCity.SelectedIndex+1;
+            int cityID = cmbCity.SelectedIndex;
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
@@ -52,7 +52,7 @@ namespace NexusContacts
                 {
                     
 
-                    string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
+                    string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite], [CityID]) " +
                      $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
                      $"{cityID})";
                     baseDal.ExecuteInsertQuery(sql);
@@ -75,7 +75,7 @@ namespace NexusContacts
             }
             else
             {
-                string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
+                string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite], [CityID]) " +
                      $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
                      $"{cityID})";
                 baseDal.ExecuteInsertQuery(sql);
