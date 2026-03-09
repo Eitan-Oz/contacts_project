@@ -1,4 +1,4 @@
-锘縰sing System;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices; 
 
@@ -11,16 +11,16 @@ namespace NexusContacts.models
         private string _phoneNumber;
         private byte? _age;
         private bool? _isFavorite;
-        private City _city;
+        private int _cityId;
 
 
 
         public int ContID { get; internal set; }
 
-        public City City
+        public int CityId
         {
-             get => _city;
-            set { _city = value; OnPropertyChanged(); }
+             get => _cityId;
+            set { _cityId = value; OnPropertyChanged(); }
         }
 
         public string FirstName
@@ -58,8 +58,8 @@ namespace NexusContacts.models
 
         }
 
-        // 讛讜住驻转讬 讗转 cityId 诇专砖讬诪转 讛驻专诪讟专讬诐
-        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,City city)
+        // 溴耵 帔 cityId 禅铤 漪桫轫
+        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,int city)
         {
             this.ContID = ID;
             this.FirstName = Fname;
@@ -67,7 +67,7 @@ namespace NexusContacts.models
             this.PhoneNumber = phonNum;
             this.Age = age;
             this.IsFavorite = favo;
-            this._city = city;
+            this._cityId = city;
         }
 
 

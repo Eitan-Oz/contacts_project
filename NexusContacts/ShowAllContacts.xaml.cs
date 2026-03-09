@@ -116,8 +116,9 @@ namespace NexusContacts
                 Pepole save = people[index];
                 BaseDal dal = new BaseDal();
                 dal.ExecuteDeleteQuery($"DELETE FROM [Peoples] WHERE contID = {save.ContID}");
+                people.RemoveAt(index);
                 MessageBox.Show("Contact deleted");
-                
+
             }   
         }
 

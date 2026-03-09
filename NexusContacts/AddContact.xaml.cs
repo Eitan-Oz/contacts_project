@@ -39,6 +39,7 @@ namespace NexusContacts
                 return;
             }
             string phoneNum = txtPhone.Text.ToString();
+            int cityID = cmbCity.SelectedIndex+1;
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
@@ -53,9 +54,11 @@ namespace NexusContacts
 
                     string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
                      $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
-                     $"{App.allCities[cmbCity.SelectedIndex].CityID})";
+                     $"{cityID})";
                     baseDal.ExecuteInsertQuery(sql);
                     MessageBox.Show("Contact added");
+                    ShowAllContacts showAllContacts = new ShowAllContacts();
+                    showAllContacts.Show();
                     this.Close();
                 }
                 else
@@ -63,7 +66,6 @@ namespace NexusContacts
                     MessageBoxResult result = MessageBox.Show("Do you want to change the contact information?", "Close or continue?", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.Yes)
                     {
-                        // User wants to change the contact information, so we do nothing and allow them to edit the fields
                     }
                     else
                     {
@@ -73,12 +75,13 @@ namespace NexusContacts
             }
             else
             {
-                int cityID = App.allCities[cmbCity.SelectedIndex].CityID;   
                 string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite ], [CityID]) " +
                      $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
                      $"{cityID})";
                 baseDal.ExecuteInsertQuery(sql);
                 MessageBox.Show("Contact added");
+                ShowAllContacts showAllContacts = new ShowAllContacts();
+                showAllContacts.Show();
                 this.Close();
             }
 
