@@ -19,8 +19,14 @@ namespace NexusContacts.models
 
         public City City
         {
-             get => _city;
+            get => _city;
             set { _city = value; OnPropertyChanged(); }
+        }
+
+        public string CityName
+        {
+             get => _city?.CityNameHe;
+            set { _city = App.allCities.Find(c => c.CityNameHe == value); OnPropertyChanged(); }
         }
        
 
@@ -60,15 +66,15 @@ namespace NexusContacts.models
         }
 
         // הוספתי את cityId לרשימת הפרמטרים
-        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,City city)
+        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo)
         {
             this.ContID = ID;
-            this.FirstName = Fname;
-            this.LastName = Lname;
-            this.PhoneNumber = phonNum;
-            this.Age = age;
-            this.IsFavorite = favo;
-            this._city = city;
+            this._firstName = Fname;
+            this._lastName = Lname;
+            this._phoneNumber = phonNum;
+            this._age = age;
+            this._isFavorite = favo;
+            this._city = App.allCities.Find(c => c.CityID == cityId); 
         }
 
 

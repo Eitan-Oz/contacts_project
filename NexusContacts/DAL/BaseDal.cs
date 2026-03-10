@@ -49,7 +49,7 @@ namespace NexusContacts
                     p.Age = row.Field<byte>("Age");
                     p.PhoneNumber = row.Field<string>("PhoneNum");
                     p.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
-                    p.City = row.Field<City>("CityID");//!!!!!
+                    p.City = App.allCities.Find(c => c.CityID == row.Field<int>("CityID"));
                     students.Add(p);
                 }
                 return students;
