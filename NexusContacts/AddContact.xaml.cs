@@ -39,7 +39,10 @@ namespace NexusContacts
                 return;
             }
             string phoneNum = txtPhone.Text.ToString();
-            int cityID = cmbCity.SelectedIndex;
+
+
+            int cityID = App.allCities.FirstOrDefault(c => c.CityNameHe == cmbCity.SelectedItem.ToString()).CityID;
+
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();

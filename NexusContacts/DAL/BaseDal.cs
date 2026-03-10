@@ -42,15 +42,15 @@ namespace NexusContacts
             {
                 foreach (DataRow row in dt.Rows)
                 {
-                    Pepole s = new Pepole();
-                    s.ContID = row.Field<int>("ContID");
-                    s.FirstName = row.Field<string>("FName");
-                    s.LastName = row.Field<string>("LName");
-                    s.Age = row.Field<byte>("Age");
-                    s.PhoneNumber = row.Field<string>("PhoneNum");
-                    s.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
-                    s.CityId = row.Field<int>("CityID");
-                    students.Add(s);
+                    Pepole p = new Pepole();
+                    p.ContID = row.Field<int>("ContID");
+                    p.FirstName = row.Field<string>("FName");
+                    p.LastName = row.Field<string>("LName");
+                    p.Age = row.Field<byte>("Age");
+                    p.PhoneNumber = row.Field<string>("PhoneNum");
+                    p.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
+                    p.City = row.Field<City>("CityID");//!!!!!
+                    students.Add(p);
                 }
                 return students;
             }

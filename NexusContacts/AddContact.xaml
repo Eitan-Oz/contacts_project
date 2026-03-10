@@ -234,7 +234,7 @@
 
                 <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock Text="Select City:" FontSize="14" Foreground="#888" Margin="0,0,0,5" HorizontalAlignment="Right"/>
-                    <ComboBox x:Name="cmbCity" ItemsSource="{Binding citiesName}" FontSize="18" Height="50" Width="350" 
+                    <ComboBox x:Name="cmbCity" ItemsSource="{Binding CityNameHe}" FontSize="18" Height="50" Width="350" 
                           FlowDirection="RightToLeft" IsEditable="True" IsTextSearchCaseSensitive="True" 
                           Padding="10,0"/>
                 </StackPanel>

@@ -40,7 +40,7 @@ namespace NexusContacts
             if (App.allCities != null)
             {
                 cmbCity.ItemsSource = App.allCities.Select(c => c.CityNameHe).ToList();
-                cmbCity.SelectedItem = App.allCities.FirstOrDefault(c => c.CityID == p.CityId)?.CityNameHe;
+                cmbCity.SelectedItem = App.allCities.FirstOrDefault(c => c.CityID == p.City.CityID)?.CityID;
             }
         }
 

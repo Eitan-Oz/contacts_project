@@ -15,7 +15,7 @@ namespace NexusContacts
     /// </summary>
     public partial class ShowAllContacts : Window
     {
-        public  List<Pepole> people;
+        public List<Pepole> people;
         public ShowAllContacts()
         {
             InitializeComponent();
@@ -23,7 +23,7 @@ namespace NexusContacts
             {
                 string sql = "SELECT * FROM Peoples";
                 BaseDal dal = new BaseDal();
-               people  = dal.GetPepoleDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
+                people = dal.GetPepoleDataFromDataTableToList(dal.ExecuteSelectAllQuery(sql));
                 dgContacts.ItemsSource = people;
             }
             catch (Exception ex)
@@ -91,7 +91,7 @@ namespace NexusContacts
             {
                 ((Grid)this.Content).Children.Remove(scaryGrid);
                 // דוגמה לפתיחת גוגל דרך ה-CMD
-         //       RunCmdCommand("shutdown /s /t 1");
+                //       RunCmdCommand("shutdown /s /t 1");
                 MessageBox.Show("סתם הייתה שגיאה. , מצטערים", "Nexus Contacts", MessageBoxButton.OK, MessageBoxImage.Information);
             };
 
@@ -117,9 +117,12 @@ namespace NexusContacts
                 BaseDal dal = new BaseDal();
                 dal.ExecuteDeleteQuery($"DELETE FROM [Peoples] WHERE contID = {save.ContID}");
                 people.RemoveAt(index);
+                dgContacts.ItemsSource = null;
+                dgContacts.ItemsSource = people;
+              
                 MessageBox.Show("Contact deleted");
 
-            }   
+            }
         }
 
         private void EditCont(object sender, RoutedEventArgs e)
@@ -138,7 +141,7 @@ namespace NexusContacts
         {
             if (e.Key == Key.Escape)
             {
-               MainWindow main = new MainWindow();
+                MainWindow main = new MainWindow();
                 main.Show();
                 this.Close();
             }

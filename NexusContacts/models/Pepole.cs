@@ -11,17 +11,18 @@ namespace NexusContacts.models
         private string _phoneNumber;
         private byte? _age;
         private bool? _isFavorite;
-        private int _cityId;
+        private City _city;
 
 
 
         public int ContID { get; internal set; }
 
-        public int CityId
+        public City City
         {
-             get => _cityId;
-            set { _cityId = value; OnPropertyChanged(); }
+             get => _city;
+            set { _city = value; OnPropertyChanged(); }
         }
+       
 
         public string FirstName
         {
@@ -59,7 +60,7 @@ namespace NexusContacts.models
         }
 
         // הוספתי את cityId לרשימת הפרמטרים
-        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,int city)
+        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,City city)
         {
             this.ContID = ID;
             this.FirstName = Fname;
@@ -67,7 +68,7 @@ namespace NexusContacts.models
             this.PhoneNumber = phonNum;
             this.Age = age;
             this.IsFavorite = favo;
-            this._cityId = city;
+            this._city = city;
         }
 
 
