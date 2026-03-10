@@ -46,7 +46,6 @@ namespace NexusContacts
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            // בדיקת תקינות - האם נבחרה עיר
             if (cmbCity.SelectedItem == null)
             {
                 MessageBox.Show("Please select a city.");

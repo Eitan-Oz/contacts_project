@@ -33,13 +33,28 @@ namespace NexusContacts
         {
             string Fname = txtFirstName.Text.ToString();
             string Lname = txtLastName.Text.ToString();
-            if (!byte.TryParse(txtAge.Text.ToString(), out byte age)||age>120)
+            if (!byte.TryParse(txtAge.Text.ToString(), out byte age) || age > 120)
             {
                 MessageBox.Show("Please enter a valid age.");
                 return;
             }
             string phoneNum = txtPhone.Text.ToString();
-            int cityID = cmbCity.SelectedIndex;
+            if (cmbCity.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a city.");
+                return;
+            }
+
+            // if (cmbCity.SelectedIndex == -1)
+            //  {
+            //   MessageBox.Show("Please select an existing city.");
+            //   return;
+            //   }
+            //  else
+            // {
+            int cityID = cmbCity.SelectedIndex+1;
+            //  }
+
             bool FavoCheck = chkIsFavorite.IsChecked ?? false;
             int favSqlValue = FavoCheck ? 1 : 0;
             BaseDal baseDal = new BaseDal();
@@ -50,7 +65,7 @@ namespace NexusContacts
                 MessageBoxResult saveResult = MessageBox.Show("A contact with the same name already exists. Do you want to save anyway?", "Duplicate Contact", MessageBoxButton.YesNo, MessageBoxImage.Warning);
                 if (saveResult == MessageBoxResult.Yes)
                 {
-                    
+
 
                     string sql = $"INSERT INTO [Peoples] (Fname, Lname, PhoneNum, age, [IsFavorite], [CityID]) " +
                      $"VALUES (N'{Fname}', N'{Lname}', N'{phoneNum}', {age}, {favSqlValue}," +
