@@ -1,0 +1,253 @@
+<Window x:Class="NexusContacts.EditContactWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NexusContacts"
+        mc:Ignorable="d"
+        Title="Edit Contact" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        FontFamily="Segoe UI"
+        FlowDirection="RightToLeft"
+        PreviewKeyUp="GoBack">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryColor" Color="#4A90E2"/>
+        <SolidColorBrush x:Key="PrimaryDarkColor" Color="#357ABD"/>
+        <SolidColorBrush x:Key="BackgroundColor" Color="#F5F7FA"/>
+        <SolidColorBrush x:Key="CardBackground" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="TextGray" Color="#7F8C8D"/>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FAFAFA"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="10,0"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="8">
+                            <ScrollViewer x:Name="PART_ContentHost"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="BorderBrush" Value="{StaticResource PrimaryColor}"/>
+                                <Setter Property="Background" Value="#FFFFFF"/>
+                                <Setter Property="Effect">
+                                    <Setter.Value>
+                                        <DropShadowEffect ShadowDepth="0" Color="#4A90E2" Opacity="0.3" BlurRadius="5"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style TargetType="ComboBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="#FAFAFA"/>
+            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+        </Style>
+
+        <Style x:Key="SaveButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource PrimaryColor}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" 
+                                Background="{TemplateBinding Background}" 
+                                CornerRadius="25" 
+                                BorderThickness="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            <Border.Effect>
+                                <DropShadowEffect BlurRadius="10" ShadowDepth="3" Opacity="0.3" Color="#4A90E2"/>
+                            </Border.Effect>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource PrimaryDarkColor}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="RenderTransform">
+                                    <Setter.Value>
+                                        <ScaleTransform ScaleX="0.98" ScaleY="0.98"/>
+                                    </Setter.Value>
+                                </Setter>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Window.Resources>
+
+    <Window.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#E6E9F0" Offset="0"/>
+            <GradientStop Color="#EEF1F5" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+
+    <Viewbox Stretch="Uniform">
+
+        <Border Width="750" Height="580"
+                Background="{StaticResource CardBackground}" 
+                CornerRadius="15" 
+                Margin="20" 
+                Padding="20">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="20" ShadowDepth="5" Opacity="0.1" Color="Black"/>
+            </Border.Effect>
+
+            <Grid FlowDirection="RightToLeft">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1.2*"/>
+                    <RowDefinition Height="1.0*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="Edit Contact" 
+                           FontSize="32" 
+                           Foreground="#2C3E50"
+                           HorizontalAlignment="Center" 
+                           VerticalAlignment="Center" 
+                           Grid.ColumnSpan="2" 
+                           FontWeight="SemiBold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect ShadowDepth="2" Direction="320" Color="Gray" Opacity="0.2" BlurRadius="2"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+
+                <Grid Grid.Row="1" Grid.Column="0" Margin="15">
+                    <TextBox x:Name="txtFirstName" FontSize="16"/>
+                    <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=txtFirstName}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run Text="First Name"/>
+                    </TextBlock>
+                </Grid>
+
+                <Border Grid.Row="1" Grid.Column="1" Background="#F0F8FF" CornerRadius="10" Margin="20" Height="50" VerticalAlignment="Center">
+                    <TextBlock x:Name="ContactID" 
+                               FontSize="20"
+                               Foreground="{StaticResource PrimaryColor}"
+                               HorizontalAlignment="Center" 
+                               VerticalAlignment="Center" 
+                               FontWeight="Bold">
+                        <TextBlock.Text>
+                            <Binding Path="ContID" StringFormat="ID: {0}"/>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </Border>
+
+                <Grid Grid.Row="2" Grid.Column="0" Margin="15">
+                    <TextBox x:Name="txtLastName" FontSize="16"/>
+                    <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=txtLastName}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run Text="Last Name"/>
+                    </TextBlock>
+                </Grid>
+
+                <Grid Grid.Row="2" Grid.Column="1" Margin="15">
+                    <TextBox x:Name="txtPhone" FontSize="16"/>
+                    <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=txtPhone}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run Text="Phone Number"/>
+                    </TextBlock>
+                </Grid>
+
+                <Grid Grid.Row="3" Grid.Column="0" Margin="15">
+                    <TextBox x:Name="txtAge" FontSize="16"/>
+                    <TextBlock FontSize="16" Foreground="{StaticResource TextGray}" IsHitTestVisible="False" VerticalAlignment="Center" Margin="12,0,0,0">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=txtAge}" Value="">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                        <Run Text="Age"/>
+                    </TextBlock>
+                </Grid>
+
+                <StackPanel Grid.Row="3" Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" FlowDirection="RightToLeft">
+                    <CheckBox x:Name="chkIsFavorite" VerticalAlignment="Center" Cursor="Hand">
+                        <CheckBox.RenderTransform>
+                            <ScaleTransform ScaleX="1.8" ScaleY="1.8"/>
+                        </CheckBox.RenderTransform>
+                    </CheckBox>
+                    <TextBlock FontSize="18" Margin="15,0,0,0" VerticalAlignment="Center" Foreground="#555" FontWeight="SemiBold">
+                        <Run Text="Add to Favorites"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock Text="Select City:" FontSize="14" Foreground="#888" Margin="0,0,0,5" HorizontalAlignment="Right"/>
+                    <ComboBox x:Name="cmbCity" ItemsSource="{Binding citiesName}" FontSize="18" Height="50" Width="350" 
+                              FlowDirection="RightToLeft" IsEditable="True" IsTextSearchCaseSensitive="True" 
+                              Padding="10,0"/>
+                </StackPanel>
+
+                <Button x:Name="btnSave"
+                        Grid.Row="5" Grid.ColumnSpan="2" 
+                        Content="Save Contact"
+                        Style="{StaticResource SaveButtonStyle}"
+                        Width="220" Height="50"
+                        Margin="0,15,0,0"
+                        Click="btnSave_Click"/>
+
+            </Grid>
+        </Border>
+    </Viewbox>
+</Window>

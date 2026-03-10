@@ -1,40 +1,81 @@
-﻿using System.ComponentModel;
+using System;
+using System.ComponentModel;
+using System.Runtime.CompilerServices; 
 
 namespace NexusContacts.models
 {
-    internal class Pepole: INotifyPropertyChanged
+    public class Pepole : INotifyPropertyChanged
     {
-        // הוספתי internal set כדי שתוכל למלא את ה-ID כשאתה מושך נתונים מה-SQL
+        private string _firstName;
+        private string _lastName;
+        private string _phoneNumber;
+        private byte? _age;
+        private bool? _isFavorite;
+        private int _cityId;
+
+
+
         public int ContID { get; internal set; }
 
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string PhoneNumber { get; set; }
-        public byte? Age { get; set; }
+        public int CityId
+        {
+             get => _cityId;
+            set { _cityId = value; OnPropertyChanged(); }
+        }
 
-        // כאן ה-internal set מאפשר לקוד ה-SQL שלך להכניס את המידע
-        public byte[] ImageRaw { get; internal set; }
-        public bool? IsFavorite { get; internal set; }
+        public string FirstName
+        {
+            get => _firstName;
+            set { _firstName = value; OnPropertyChanged(); }
+        }
 
-        public Pepole(int ID, string Fname, string Lname, string phonNum,byte age,bool favo, byte[] getimag)
+        public string LastName
+        {
+            get => _lastName;
+            set { _lastName = value; OnPropertyChanged(); }
+        }
+
+        public string PhoneNumber
+        {
+            get => _phoneNumber;
+            set { _phoneNumber = value; OnPropertyChanged(); }
+        }
+
+        public byte? Age
+        {
+            get => _age;
+            set { _age = value; OnPropertyChanged(); }
+        }
+
+        public bool? IsFavorite
+        {
+            get => _isFavorite;
+            internal set { _isFavorite = value; OnPropertyChanged(); }
+        }
+
+        public Pepole()
+        {
+
+        }
+
+        // ������ �� cityId ������ ��������
+        public Pepole(int ID, string Fname, string Lname, string phonNum, int cityId, byte? age, bool? favo,int city)
         {
             this.ContID = ID;
             this.FirstName = Fname;
             this.LastName = Lname;
             this.PhoneNumber = phonNum;
+            this.Age = age;
+            this.IsFavorite = favo;
+            this._cityId = city;
         }
 
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add
-            {
-                throw new System.NotImplementedException();
-            }
 
-            remove
-            {
-                throw new System.NotImplementedException();
-            }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void OnPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
     }
 }

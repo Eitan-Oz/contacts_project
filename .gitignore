@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/NexusContacts/DAL/Database1.mdf
+/NexusContacts/DAL/Database1_log.ldf
+/NexusContacts/DAL/Database1.mdf
+/NexusContacts/DAL/Database1_log.ldf
+/NexusContacts/DAL/Database1.mdf
+/NexusContacts/DAL/Database1_log.ldf

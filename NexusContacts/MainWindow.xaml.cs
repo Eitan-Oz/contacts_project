@@ -1,26 +1,24 @@
-﻿using System.Windows;
-using System.Windows.Controls;
+    using NexusContacts.models;
+    using System.Collections.Generic;
+    using System.Text.Json;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using System.Windows;
+    using System.Windows.Controls;
 
-namespace NexusContacts
-{
-    public partial class MainWindow : Window
+    namespace NexusContacts
     {
-        public MessageBoxResult languageResult;
-
-        public MainWindow()
+        public partial class MainWindow : Window
         {
-            languageResult = MessageBox.Show("Do you want to stay in English? \n האם תרצה שהתוכנה תשאר באנגלית?",
-                                             "Set Language / הגדרת שפה",
-                                             MessageBoxButton.YesNo,
-                                             MessageBoxImage.Question);
-            InitializeComponent();
-            SetChoices();
 
-        }
+            public MainWindow()
+            {
+                InitializeComponent();
+                SetChoices();
 
-        public void SetChoices()
-        {
-            if (languageResult == MessageBoxResult.Yes) 
+            }
+
+            public void SetChoices()
             {
                 string[] choicesL = new string[3] { "Add Contact", "All Contacts", "Favorite Contacts" };
 
@@ -29,44 +27,53 @@ namespace NexusContacts
                     Button btn = new Button();
                     btn.Content = choicesL[i];
                     btn.Margin = new Thickness(5);
+                    switch (i)
+                    {
+                        case 0:
+                            btn.Click += AddContact;
+                            break;
+                        case 1:
+                            btn.Click += ContactsShow;
+                            break;
+                        case 2:
+                            btn.Click += FavoriteContactsShow;
+                            break;
+                    }
                     ChoicesGrid.Children.Add(btn);
                 }
-            }
-            else if (languageResult == MessageBoxResult.No) 
-            {
-                Chetext.Text = "ברוכים הבאים לאפליקצית אנשי הקשר";
-                string[] choicesL = new string[3] { "הוספת איש קשר", "רשימת אנשי קשר", "אנשי קשר מועדפים" };
 
-                for (int i = 0; i < choicesL.Length; i++)
-                {
-                    Button btn = new Button();
-                    btn.Content = choicesL[i];
-                    btn.Margin = new Thickness(5);
-                    ChoicesGrid.Children.Add(btn);
-                }
             }
-            else
+
+
+            private void Btn_Click(object sender, RoutedEventArgs e)
             {
-                MessageBox.Show("Something went wrong. I think you closed the window by pressing X.",
-                                "Error",
-                                MessageBoxButton.OK,
-                                MessageBoxImage.Stop);
+                throw new System.NotImplementedException();
+            }
+
+            private void ContactsShow(object sender, RoutedEventArgs e)
+            {
+                ShowAllContacts showAllContacts = new ShowAllContacts();
+                showAllContacts.Show();
+
                 this.Close();
             }
+            private void AddContact(object sender, RoutedEventArgs e)
+            {
+                AddContact addContactWindow = new AddContact();
+                addContactWindow.Show();
+                this.Close();
+
+            }
+            private void FavoriteContactsShow(object sender, RoutedEventArgs e)
+            {
+                ShowAllContacts take = new ShowAllContacts();
+                take.Activate();
+                List<Pepole> getP = take.people;
+                take.Close();
+                AllFavoriteShow favoriteShow = new AllFavoriteShow(getP);
+                favoriteShow.Show();
+                this.Close();
+            }
+
         }
-
-        private void ContactsShow(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void AddContact(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void FavoriteContactsShow(object sender, RoutedEventArgs e)
-        {
-
-        }
-
     }
-}

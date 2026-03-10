@@ -1,12 +1,15 @@
-﻿using System;
+﻿using NexusContacts.models;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 
 namespace NexusContacts
@@ -30,6 +33,56 @@ namespace NexusContacts
 
             // יצירת האובייקט שמייצג את החיבור לדטה בייס
             conn = new SqlConnection(ConnectionString);
+        }
+        public List<Pepole> GetPepoleDataFromDataTableToList(DataTable dt)
+        {
+            List<Pepole> students = new List<Pepole>();
+
+            try
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    Pepole s = new Pepole();
+                    s.ContID = row.Field<int>("ContID");
+                    s.FirstName = row.Field<string>("FName");
+                    s.LastName = row.Field<string>("LName");
+                    s.Age = row.Field<byte>("Age");
+                    s.PhoneNumber = row.Field<string>("PhoneNum");
+                    s.IsFavorite = row.Field<bool?>("IsFavorite") ?? false;
+                    s.CityId = row.Field<int>("CityID");
+                    students.Add(s);
+                }
+                return students;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
+                return students;
+            }
+        }
+        public List<City> GetCityDataFromDataTableToList(DataTable dt)
+        {
+            List<City> cities = new List<City>();
+
+            try
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    City ci = new City();
+                    ci.CityID = row.Field<int>("CityID");
+                    ci.CityNameEn = row.Field<string>("city_name_en");
+                    ci.CityNameHe = row.Field<string>("city_name_he");
+                    cities.Add(ci);
+                }
+                return cities;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred while processing contact data: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                Debug.WriteLine(ex);
+                return cities;
+            }
         }
 
         public int ExecuteInsertQuery(string sql)
