@@ -147,29 +147,5 @@ namespace NexusContacts
             }
         }
 
-        /* private void RunCmdCommand(string command)
-         {
-             ProcessStartInfo startInfo = new ProcessStartInfo();
-
-             // מציינים שאנחנו רוצים להריץ את ה-CMD
-             startInfo.FileName = "cmd.exe";
-
-             // /c אומר ל-CMD: "תריץ את הפקודה הבאה ואז תסגור את עצמך"
-             startInfo.Arguments = "/c " + command;
-
-             // הגדרות למניעת פתיחת חלון שחור קופץ (אם רוצים)
-             startInfo.RedirectStandardOutput = true;
-             startInfo.UseShellExecute = false;
-             startInfo.CreateNoWindow = true;
-
-             // הרצת התהליך
-             using (Process process = Process.Start(startInfo))
-             {
-                 // אפשר לקרוא כאן את מה שה-CMD החזיר אם צריך
-                 // string result = process.StandardOutput.ReadToEnd();
-             }
-         }*/
-
-
     }
 }

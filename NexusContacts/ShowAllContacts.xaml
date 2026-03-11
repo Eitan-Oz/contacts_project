@@ -1,4 +1,4 @@
-<Window
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -20,9 +20,18 @@
               Background="White"
               AlternatingRowBackground="#F2F2F2"
               BorderBrush="LightGray"
-              BorderThickness="1" AutoGenerateColumns="False" IsEnabled="False">
+              BorderThickness="1" 
+              AutoGenerateColumns="False">
 
-
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="מזהה איש קשר" Binding="{Binding ContID}" Width="*"/>
+                <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="*"/>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" Width="*"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding PhoneNumber}" Width="*"/>
+                <DataGridTextColumn Header="Age" Binding="{Binding Age}" Width="60"/>
+                <DataGridTextColumn Header="City" Binding="{Binding City.CityNameHe}" Width="*"/>
+                <DataGridCheckBoxColumn Header="Favorite" Binding="{Binding IsFavorite}" Width="80"/>
+            </DataGrid.Columns>
 
             <DataGrid.ContextMenu>
                 <ContextMenu>
@@ -30,8 +39,7 @@
                     <MenuItem Header="Delete" Click="DeleteCont"/>
                 </ContextMenu>
             </DataGrid.ContextMenu>
-            
+
         </DataGrid>
     </Grid>
 </Window>
-    

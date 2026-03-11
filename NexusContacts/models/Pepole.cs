@@ -57,7 +57,7 @@ namespace NexusContacts.models
         public bool? IsFavorite
         {
             get => _isFavorite;
-            internal set { _isFavorite = value; OnPropertyChanged(); }
+            set { _isFavorite = value; OnPropertyChanged(); }
         }
 
         public Pepole()
